@@ -1,0 +1,1 @@
+export type BoundingBox = number[];
