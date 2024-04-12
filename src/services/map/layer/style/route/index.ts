@@ -23,6 +23,14 @@ export const roadRouteStyle = new Style({
   }),
 });
 
+export const flightRouteStyle = new Style({
+  stroke: new Stroke({
+    color: "rgba(15, 84, 255, 50)",
+    lineDash: [6, 5],
+    width: 4,
+  }),
+});
+
 // OPAQUE
 export const routeOpaqueStyle = new Style({
   stroke: new Stroke({
