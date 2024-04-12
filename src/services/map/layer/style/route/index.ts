@@ -8,13 +8,6 @@ export const routeStyle = new Style({
   }),
 });
 
-export const routeOpaqueStyle = new Style({
-  stroke: new Stroke({
-    color: "rgba(0, 149, 255, 50)",
-    width: 4,
-  }),
-});
-
 export const offroadRouteStyle = new Style({
   stroke: new Stroke({
     color: "rgb(0, 149, 255)",
@@ -27,5 +20,21 @@ export const roadRouteStyle = new Style({
   stroke: new Stroke({
     color: "rgb(15, 84, 255)",
     width: 4,
+  }),
+});
+
+// OPAQUE
+export const routeOpaqueStyle = new Style({
+  stroke: new Stroke({
+    color: "rgba(0, 149, 255, 50)",
+    width: 4,
+  }),
+});
+
+export const offroadOpaqueStyle = new Style({
+  stroke: new Stroke({
+    color: "rgba(0, 149, 255, 30)",
+    lineDash: [6, 5],
+    width: 2,
   }),
 });

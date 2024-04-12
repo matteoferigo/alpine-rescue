@@ -1,11 +1,11 @@
 "use client";
 
 import Map from "@/components/map";
-import { PALA_NORDEST } from "@/const/nodes";
+import { MONTE_PIANO } from "@/const/nodes";
 import { fromLonLat } from "ol/proj";
 
 // Coordinate: [lng, lat]
-const arrivalNode = fromLonLat(PALA_NORDEST);
+const arrivalNode = fromLonLat(MONTE_PIANO);
 const initialZoom = 16;
 
 export default function Home() {

@@ -1,9 +1,9 @@
 import { overpassRequest } from "@/services/overpass";
 import { highwayTagFilter } from "@/services/overpass/filters/tags";
-import type { GeomOutput } from "@/services/overpass/types/geom";
+import type { NodeOutput } from "@/services/overpass/types/node";
 import type { Coordinate } from "ol/coordinate";
 
-export const searchTrailsNearby = async (
+export const searchTrailNodesNearby = async (
   node: Coordinate,
   distance: number,
   outFormat: string
@@ -12,7 +12,7 @@ export const searchTrailsNearby = async (
 
   // https://dev.overpass-api.de/overpass-doc/en/full_data/polygon.html
   // https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL#out
-  const query = `way(around:${distance},${point})${highwayTagFilter};out ${outFormat};`;
+  const query = `way(around:${distance},${point})${highwayTagFilter};node(w);out ${outFormat};`;
 
-  return overpassRequest<GeomOutput>(query);
+  return overpassRequest<NodeOutput>(query);
 };

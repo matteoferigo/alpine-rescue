@@ -26,3 +26,10 @@ export const offroadPointStyle = new Style({
     stroke: new Stroke({ color: "rgb(0, 149, 255)", width: 3 }),
   }),
 });
+
+export const offroadNodeStyle = new Style({
+  image: new Circle({
+    radius: 3,
+    fill: new Fill({ color: "rgb(0, 149, 255)" }),
+  }),
+});

@@ -6,7 +6,7 @@ import { searchTrailheadsNearby } from "@/services/requests/trailheads/nearby";
 import type { Coordinate } from "ol/coordinate";
 import { getDistance } from "ol/sphere";
 
-export async function searchShorterPath(
+export async function searchShorterRoute(
   startRoadPoint: Coordinate,
   endFootPoint: Coordinate,
   maxDistance: number = 2000
@@ -30,7 +30,7 @@ export async function searchShorterPath(
         nodes[getDistance(trailheadPoint, startRoadPoint)] = node;
       });
       closerTrailheads = Object.keys(nodes)
-        .sort((a, b) => +a - +b)
+        .toSorted((a, b) => +a - +b)
         .slice(0, 10)
         .map((key) => nodes[key]);
     }

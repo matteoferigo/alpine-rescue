@@ -5,7 +5,7 @@ import type { Coordinate } from "ol/coordinate";
 
 export async function getFootDirections(start: Coordinate, end: Coordinate) {
   const result = await fetch(
-    `/api/openroute/directions/foot-hiking?start=${start[0]},${start[1]}&end=${end[0]},${end[1]}`
+    `/api/openroute/v2/directions/foot-hiking?start=${start[0]},${start[1]}&end=${end[0]},${end[1]}`
   );
   const response: DirectionsResponse = await result.json();
 
