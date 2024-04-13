@@ -51,14 +51,16 @@ export async function searchShorterRoute(
         ]);
         // Calcolo la durata complessiva
         if (!roadDirections || !trailDirections) return null;
+        const roadDuration = getRouteDuration(roadDirections);
+        const trailDuration = getRouteDuration(trailDirections);
         // Normalizzo i risultati
         return {
           trailheadPoint,
           roadDirections,
           trailDirections,
-          duration:
-            getRouteDuration(roadDirections) +
-            getRouteDuration(trailDirections),
+          roadDuration,
+          trailDuration,
+          duration: roadDuration + trailDuration,
         };
       })
     );

@@ -25,8 +25,8 @@ export const roadRouteStyle = new Style({
 
 export const flightRouteStyle = new Style({
   stroke: new Stroke({
-    color: "rgba(15, 84, 255, 50)",
-    lineDash: [6, 5],
+    color: "rgba(100, 125, 200, 50)",
+    lineDash: [10, 15],
     width: 4,
   }),
 });

@@ -26,11 +26,15 @@ import {
 import { thunderforestLandscapeTileLayer } from "@/services/map/layer/thunderforest/landscape";
 import { createVectorSource } from "@/services/map/source/vector";
 import "ol/ol.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-const MapComponent = ({ center, zoom }: MapComponentProps) => {
-  const [processing, setProcessing] = useState(false);
-
+const MapComponent = ({
+  center,
+  zoom,
+  searching,
+  onSearchStart,
+  onSearchEnd,
+}: MapComponentProps) => {
   const { destinationCoords, trailEndCoords, offroadPath } =
     useOffroadRouteContext();
   const {
@@ -51,7 +55,7 @@ const MapComponent = ({ center, zoom }: MapComponentProps) => {
   const findHelicopterRoute = useFindHelicopterRoute();
 
   // Definisco data-layer della mappa
-  const nodesLayer = useVectorLayer(pointStyle, 1);
+  const nodesLayer = useVectorLayer(pointStyle, 10);
   const routesLayer = useVectorLayer(routeStyle);
 
   // Impostazione della mappa
@@ -61,8 +65,8 @@ const MapComponent = ({ center, zoom }: MapComponentProps) => {
     layers: [thunderforestLandscapeTileLayer, nodesLayer, routesLayer],
     onClick(e) {
       // Avvio il processo
-      if (processing) return;
-      setProcessing(true);
+      if (searching) return;
+      onSearchStart();
 
       // Ripristino mappa
       nodesLayer.getSource()?.clear();
@@ -80,13 +84,15 @@ const MapComponent = ({ center, zoom }: MapComponentProps) => {
             findHelicopterRoute(hospitalCoords!, trailEndCoords!),
           ])
         )
-        .finally(() => setProcessing(false));
+        .finally(() => {
+          onSearchEnd();
+        });
     },
   });
 
   // Rappresento nodi e percorsi sulla mappa
   useEffect(() => {
-    if (!processing) {
+    if (!searching) {
       // Mostro nodi sulla mappa
       const nodesFeatures = [];
       if (destinationCoords) {
@@ -145,7 +151,7 @@ const MapComponent = ({ center, zoom }: MapComponentProps) => {
       routesLayer.setSource(createVectorSource(routesFeatures));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [processing]);
+  }, [searching]);
 
   return <div ref={ref} className="w-full h-screen" />;
 };

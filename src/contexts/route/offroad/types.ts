@@ -11,4 +11,10 @@ export type OffroadRouteContextValue = {
 
   offroadPath: Feature<Geometry>[] | undefined;
   setOffroadPath: Dispatch<SetStateAction<Feature<Geometry>[] | undefined>>;
+
+  offroadDuration: number | undefined;
+  setOffroadDuration: Dispatch<SetStateAction<number | undefined>>;
+
+  offroadElevationGain: number | undefined;
+  setOffroadElevationGain: Dispatch<SetStateAction<number | undefined>>;
 };

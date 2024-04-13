@@ -13,4 +13,14 @@ export type DriveRouteContextValue = {
   setTrailPath: Dispatch<SetStateAction<Feature<Geometry>[] | undefined>>;
   roadPath: Feature<Geometry>[] | undefined;
   setRoadPath: Dispatch<SetStateAction<Feature<Geometry>[] | undefined>>;
+
+  trailDuration: number | undefined;
+  setTrailDuration: Dispatch<SetStateAction<number | undefined>>;
+  roadDuration: number | undefined;
+  setRoadDuration: Dispatch<SetStateAction<number | undefined>>;
+
+  trailElevationGain: number | undefined;
+  setTrailElevationGain: Dispatch<SetStateAction<number | undefined>>;
+  roadElevationGain: number | undefined;
+  setRoadElevationGain: Dispatch<SetStateAction<number | undefined>>;
 };

@@ -13,4 +13,14 @@ export type HelicopterRouteContextValue = {
   setTrailPath: Dispatch<SetStateAction<Feature<Geometry>[] | undefined>>;
   flightPath: Feature<Geometry>[] | undefined;
   setFlightPath: Dispatch<SetStateAction<Feature<Geometry>[] | undefined>>;
+
+  trailDuration: number | undefined;
+  setTrailDuration: Dispatch<SetStateAction<number | undefined>>;
+  flightDuration: number | undefined;
+  setFlightDuration: Dispatch<SetStateAction<number | undefined>>;
+
+  trailElevationGain: number | undefined;
+  setTrailElevationGain: Dispatch<SetStateAction<number | undefined>>;
+  flightElevationGain: number | undefined;
+  setFlightElevationGain: Dispatch<SetStateAction<number | undefined>>;
 };

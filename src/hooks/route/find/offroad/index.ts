@@ -1,13 +1,19 @@
 import { useOffroadRouteContext } from "@/contexts/route/offroad/hooks";
 import { useShowErrorMessage } from "@/hooks/error/message";
 import { createWayFeatures } from "@/services/map/features/way";
+import { calculateWayElevationGain } from "@/services/path/way/elevation-gain";
 import { searchShorterOffroad } from "@/services/search/shorter-offroad";
 import type { Coordinate } from "ol/coordinate";
 
 export const useFindOffroadRoute = () => {
   const showError = useShowErrorMessage();
-  const { setDestinationCoords, setTrailEndCoords, setOffroadPath } =
-    useOffroadRouteContext();
+  const {
+    setDestinationCoords,
+    setTrailEndCoords,
+    setOffroadPath,
+    setOffroadDuration,
+    setOffroadElevationGain,
+  } = useOffroadRouteContext();
 
   return async function (destinationCoords: Coordinate) {
     try {
@@ -22,6 +28,10 @@ export const useFindOffroadRoute = () => {
       // Definisco percorso fuori sentiero
       setOffroadPath(
         createWayFeatures([...closerTrail.nodes, destinationCoords])
+      );
+      setOffroadDuration(closerTrail.duration);
+      setOffroadElevationGain(
+        calculateWayElevationGain(trailEndCoords[2], destinationCoords[2])
       );
 
       // TEMP: Mostro dati relativi al calcolo

@@ -11,6 +11,12 @@ const HelicopterRouteProvider = ({ children }: PropsWithChildren) => {
   const [trailPath, setTrailPath] = useState<Feature<Geometry>[]>();
   const [flightPath, setFlightPath] = useState<Feature<Geometry>[]>();
 
+  const [trailDuration, setTrailDuration] = useState<number>();
+  const [flightDuration, setFlightDuration] = useState<number>();
+
+  const [trailElevationGain, setTrailElevationGain] = useState<number>();
+  const [flightElevationGain, setFlightElevationGain] = useState<number>();
+
   const value = {
     helipadCoords,
     setHelipadCoords,
@@ -21,6 +27,16 @@ const HelicopterRouteProvider = ({ children }: PropsWithChildren) => {
     setTrailPath,
     flightPath,
     setFlightPath,
+
+    trailDuration,
+    setTrailDuration,
+    flightDuration,
+    setFlightDuration,
+
+    trailElevationGain,
+    setTrailElevationGain,
+    flightElevationGain,
+    setFlightElevationGain,
   };
 
   return createElement(HelicopterRouteContext.Provider, { value }, children);

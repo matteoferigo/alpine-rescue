@@ -6,8 +6,13 @@ import type { Coordinate } from "ol/coordinate";
 
 export const useFindDriveRoute = () => {
   const showError = useShowErrorMessage();
-  const { setTrailheadCoords, setTrailPath, setRoadPath } =
-    useDriveRouteContext();
+  const {
+    setTrailheadCoords,
+    setTrailPath,
+    setTrailDuration,
+    setRoadPath,
+    setRoadDuration,
+  } = useDriveRouteContext();
 
   return async function (fromPoint: Coordinate, toPoint: Coordinate) {
     try {
@@ -17,8 +22,10 @@ export const useFindDriveRoute = () => {
       // Definisco sentiero
       setTrailheadCoords(shorterPath.trailheadPoint);
       setTrailPath(createRouteFeatures(shorterPath.trailDirections));
+      setTrailDuration(shorterPath.trailDuration);
       // Definisco strata fino ad attacco sentiero
       setRoadPath(createRouteFeatures(shorterPath.roadDirections));
+      setRoadDuration(shorterPath.roadDuration);
     } catch (error) {
       showError(error);
     }
