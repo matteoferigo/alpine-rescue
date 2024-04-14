@@ -6,7 +6,7 @@ import { createRouteFeatures } from "@/services/map/features/route";
 import { createWayFeatures } from "@/services/map/features/way";
 import { getRouteDuration } from "@/services/openroute/directions/duration";
 import { getFootDirections } from "@/services/openroute/directions/foot";
-import { calculateWayElevationGain } from "@/services/path/way/elevation-gain";
+import { calculateElevationGain } from "@/services/path/way/elevation-gain";
 import { searchCloserHelipadPoint } from "@/services/search/closer-helipad";
 import type { Coordinate } from "ol/coordinate";
 import { getDistance } from "ol/sphere";
@@ -37,10 +37,7 @@ export const useFindHelicopterRoute = () => {
       closerHelipad[2] = elevations[1].elevation;
       // Calcolo tempo di percorrenza
       const distance = getDistance(fromPoint, closerHelipad);
-      const elevation = calculateWayElevationGain(
-        fromPoint[2],
-        closerHelipad[2]
-      );
+      const elevation = calculateElevationGain(fromPoint[2], closerHelipad[2]);
       setFlightDuration(calculateHelicopterTimeEstimation(distance, elevation));
       setFlightElevationGain(elevation);
 
@@ -49,7 +46,7 @@ export const useFindHelicopterRoute = () => {
       setTrailPath(createRouteFeatures(trailDirections));
       setTrailDuration(getRouteDuration(trailDirections));
       setTrailElevationGain(
-        calculateWayElevationGain(closerHelipad[2], toPoint[2])
+        calculateElevationGain(closerHelipad[2], toPoint[2])
       );
     } catch (error) {
       showError(error);

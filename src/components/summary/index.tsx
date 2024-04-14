@@ -1,5 +1,6 @@
 import SummaryDriveRoute from "@/components/summary/drive";
 import SummaryHelicopterRoute from "@/components/summary/helicopter";
+import SummaryOffroadRoute from "@/components/summary/offroad";
 import type { SummaryComponentProps } from "@/components/summary/types";
 
 const SummaryComponent = ({ open }: SummaryComponentProps) => {
@@ -9,6 +10,7 @@ const SummaryComponent = ({ open }: SummaryComponentProps) => {
         open ? "translate-x-0 ease-in" : "translate-x-full ease-out"
       }`}
     >
+      <SummaryOffroadRoute />
       <SummaryDriveRoute />
       <SummaryHelicopterRoute />
     </aside>

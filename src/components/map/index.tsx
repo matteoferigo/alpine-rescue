@@ -11,6 +11,7 @@ import { useFindOffroadRoute } from "@/hooks/route/find/offroad";
 import { coordinateTransform } from "@/services/map/coordinate/transform";
 import { createNodeFeatures } from "@/services/map/features/node";
 import { setFeaturesStyle } from "@/services/map/features/style";
+import { createWayFeatures } from "@/services/map/features/way";
 import {
   helipadPointStyle,
   offroadPointStyle,
@@ -23,7 +24,7 @@ import {
   roadRouteStyle,
   routeStyle,
 } from "@/services/map/layer/style/route";
-import { thunderforestLandscapeTileLayer } from "@/services/map/layer/thunderforest/landscape";
+import { thunderforestCycleTileLayer } from "@/services/map/layer/thunderforest/cycle";
 import { createVectorSource } from "@/services/map/source/vector";
 import "ol/ol.css";
 import { useEffect } from "react";
@@ -35,7 +36,7 @@ const MapComponent = ({
   onSearchStart,
   onSearchEnd,
 }: MapComponentProps) => {
-  const { destinationCoords, trailEndCoords, offroadPath } =
+  const { destinationCoords, trailEndCoords, offroadNodes } =
     useOffroadRouteContext();
   const {
     trailheadCoords,
@@ -62,7 +63,7 @@ const MapComponent = ({
   const ref = useMap({
     center,
     zoom,
-    layers: [thunderforestLandscapeTileLayer, nodesLayer, routesLayer],
+    layers: [thunderforestCycleTileLayer, nodesLayer, routesLayer],
     onClick(e) {
       // Avvio il processo
       if (searching) return;
@@ -129,9 +130,12 @@ const MapComponent = ({
 
       // Percorsi sulla mappa
       const routesFeatures = [];
-      if (offroadPath) {
+      if (offroadNodes) {
         routesFeatures.push(
-          ...setFeaturesStyle(offroadPath, offroadRouteStyle)
+          ...setFeaturesStyle(
+            createWayFeatures(offroadNodes),
+            offroadRouteStyle
+          )
         );
       }
       if (driveTrailPath) {

@@ -1,14 +1,12 @@
 import OffroadRouteContext from "@/contexts/route/offroad";
 import type { Coordinate } from "ol/coordinate";
-import type Feature from "ol/Feature";
-import type Geometry from "ol/geom/Geometry";
 import { createElement, useState, type PropsWithChildren } from "react";
 
 const OffroadRouteProvider = ({ children }: PropsWithChildren) => {
   const [destinationCoords, setDestinationCoords] = useState<Coordinate>();
   const [trailEndCoords, setTrailEndCoords] = useState<Coordinate>();
 
-  const [offroadPath, setOffroadPath] = useState<Feature<Geometry>[]>();
+  const [offroadNodes, setOffroadNodes] = useState<Coordinate[]>();
 
   const [offroadDuration, setOffroadDuration] = useState<number>();
 
@@ -20,8 +18,8 @@ const OffroadRouteProvider = ({ children }: PropsWithChildren) => {
     trailEndCoords,
     setTrailEndCoords,
 
-    offroadPath,
-    setOffroadPath,
+    offroadNodes,
+    setOffroadNodes,
 
     offroadDuration,
     setOffroadDuration,

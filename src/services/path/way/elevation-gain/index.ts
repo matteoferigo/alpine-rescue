@@ -1,4 +1,4 @@
-export const calculateWayElevationGain = (
+export const calculateElevationGain = (
   fromElevation: number,
   toElevation: number
 ) => {

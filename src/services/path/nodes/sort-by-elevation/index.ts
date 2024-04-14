@@ -1,4 +1,4 @@
-import { calculateWayElevationGain } from "@/services/path/way/elevation-gain";
+import { calculateElevationGain } from "@/services/path/way/elevation-gain";
 import type { Coordinate } from "ol/coordinate";
 
 export const sortNodesByElevation = (
@@ -10,7 +10,7 @@ export const sortNodesByElevation = (
   const sortedNodes = nodes
     .map((coordinate) => ({
       coordinate,
-      elevation: calculateWayElevationGain(coordinate[2], toNode[2]),
+      elevation: calculateElevationGain(coordinate[2], toNode[2]),
     }))
     .toSorted((a, b) => a.elevation - b.elevation);
 

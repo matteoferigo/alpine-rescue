@@ -1,5 +1,5 @@
 import { WeightedArch } from "@/services/graph/types";
-import { calculateWayElevationGain } from "@/services/path/way/elevation-gain";
+import { calculateElevationGain } from "@/services/path/way/elevation-gain";
 import { calculateWayLength } from "@/services/path/way/length";
 import { calculateWaySlope } from "@/services/path/way/slope";
 import { calculateWayTimeEstimation } from "@/services/path/way/time-estimation";
@@ -10,7 +10,7 @@ export function calculateArchWeight(
   toNode: Coordinate
 ): WeightedArch {
   // Calcolo la distanza dell'arco (in metri)
-  const elevation = calculateWayElevationGain(fromNode[2], toNode[2]);
+  const elevation = calculateElevationGain(fromNode[2], toNode[2]);
   const descending = fromNode[2] > toNode[2];
   const distance = calculateWayLength(fromNode, toNode, elevation);
   const slope = calculateWaySlope(distance, elevation);
