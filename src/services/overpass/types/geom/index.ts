@@ -1,8 +1,8 @@
-import { Bounds } from "@/services/overpass/types/bounds";
-import { LatLon } from "@/services/overpass/types/latlon";
-import { OSMType } from "@/services/overpass/types/osm-type";
-import { Tags } from "@/services/overpass/types/tags";
-import { Coordinate } from "ol/coordinate";
+import type { Bounds } from "@/services/overpass/types/bounds";
+import type { LatLon } from "@/services/overpass/types/latlon";
+import type { OSMType } from "@/services/overpass/types/osm-type";
+import type { Tags } from "@/services/overpass/types/tags";
+import type { Coordinate } from "ol/coordinate";
 
 // https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL#out
 

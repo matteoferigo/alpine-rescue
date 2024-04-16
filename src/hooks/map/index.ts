@@ -2,7 +2,7 @@ import Map from "ol/Map";
 import type MapBrowserEvent from "ol/MapBrowserEvent";
 import View from "ol/View";
 import type { Coordinate } from "ol/coordinate";
-import { ListenerFunction } from "ol/events";
+import type { ListenerFunction } from "ol/events";
 import type BaseLayer from "ol/layer/Base";
 import { useEffect, useRef } from "react";
 

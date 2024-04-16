@@ -1,4 +1,4 @@
-import { MapComponentProps } from "@/components/map/types";
+import type { MapComponentProps } from "@/components/map/types";
 import { useDriveRouteContext } from "@/contexts/route/drive/hooks";
 import { useHelicopterRouteContext } from "@/contexts/route/helicopter/hooks";
 import { useOffroadRouteContext } from "@/contexts/route/offroad/hooks";

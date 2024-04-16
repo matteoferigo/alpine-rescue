@@ -1,4 +1,4 @@
-import { WeightedArch } from "@/services/graph/types";
+import type { WeightedArch } from "@/services/graph/types";
 import { calculateElevationGain } from "@/services/path/way/elevation-gain";
 import { calculateWayLength } from "@/services/path/way/length";
 import { calculateWaySlope } from "@/services/path/way/slope";

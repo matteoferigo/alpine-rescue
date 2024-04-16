@@ -1,4 +1,4 @@
-import { ElevationPointResponse } from "@/services/openroute/types/elevation";
+import type { ElevationPointResponse } from "@/services/openroute/types/elevation";
 import type { Coordinate } from "ol/coordinate";
 
 export async function getElevation(coord: Coordinate) {

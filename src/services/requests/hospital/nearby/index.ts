@@ -1,6 +1,6 @@
 import { overpassRequest } from "@/services/overpass";
 import { hospitalTagFilter } from "@/services/overpass/filters/tags";
-import { NodeOutput } from "@/services/overpass/types/node";
+import type { NodeOutput } from "@/services/overpass/types/node";
 import type { Coordinate } from "ol/coordinate";
 
 export const searchHospitalNearby = async (
