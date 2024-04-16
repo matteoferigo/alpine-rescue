@@ -1,8 +1,15 @@
 import ElevationProfile from "@/components/elevation";
+import RouteArchsTable from "@/components/summary/route";
 import { useOffroadRouteContext } from "@/contexts/route/offroad/hooks";
 
 const SummaryOffroadRoute = () => {
-  const { offroadNodes } = useOffroadRouteContext();
+  const {
+    offroadNodes,
+    offroadArchs,
+    offroadDistance,
+    offroadDuration,
+    offroadElevationGain,
+  } = useOffroadRouteContext();
   const hasOffroadRoute = offroadNodes != null;
 
   return (
@@ -19,7 +26,13 @@ const SummaryOffroadRoute = () => {
           <ElevationProfile
             nodes={offroadNodes}
             className="w-full my-5"
-            width={444}
+            width={900}
+          />
+          <RouteArchsTable
+            archs={offroadArchs!}
+            distance={offroadDistance!}
+            duration={offroadDuration!}
+            elevationGain={offroadElevationGain!}
           />
         </>
       ) : (

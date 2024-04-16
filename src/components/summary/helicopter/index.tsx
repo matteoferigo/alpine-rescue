@@ -22,28 +22,34 @@ const SummaryHelicopterRoute = () => {
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <tbody>
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <th className="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 Tempo in volo
               </th>
-              <td className="py-4 text-right">{formatTime(flightDuration)}</td>
+              <td className="px-3 py-4 text-right">
+                {formatTime(flightDuration)}
+              </td>
             </tr>
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <th className="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 Tempo percorrenza sentiero
               </th>
-              <td className="py-4 text-right">{formatTime(trailDuration)}</td>
+              <td className="px-3 py-4 text-right">
+                {formatTime(trailDuration)}
+              </td>
             </tr>
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th className="py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <th className="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 Tempo fuori-sentiero
               </th>
-              <td className="py-4 text-right">{formatTime(offroadDuration)}</td>
+              <td className="px-3 py-4 text-right">
+                {formatTime(offroadDuration)}
+              </td>
             </tr>
           </tbody>
           <tfoot>
             <tr className="font-semibold text-gray-900 dark:text-white">
-              <th className="py-3 text-base">Tempo stimato</th>
-              <td className="py-3 text-right">
+              <th className="px-3 py-3 text-base">Tempo stimato</th>
+              <td className="px-3 py-3 text-right">
                 {formatTime(flightDuration + trailDuration + offroadDuration)}
               </td>
             </tr>

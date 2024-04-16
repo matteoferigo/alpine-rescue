@@ -10,6 +10,9 @@ export const useFindOffroadRoute = () => {
     setDestinationCoords,
     setTrailEndCoords,
     setOffroadNodes,
+    setOffroadArchs,
+    setOffroadGraph,
+    setOffroadDistance,
     setOffroadDuration,
     setOffroadElevationGain,
   } = useOffroadRouteContext();
@@ -17,8 +20,8 @@ export const useFindOffroadRoute = () => {
   return async function (destinationCoords: Coordinate) {
     try {
       // Cerco sentiero più vicino
-      const offroadNodess = await searchShorterOffroad(destinationCoords, 500);
-      const closerTrail = offroadNodess[0];
+      const offroadNodes = await searchShorterOffroad(destinationCoords, 500);
+      const closerTrail = offroadNodes[0];
       const trailEndCoords = closerTrail.nodes[0];
 
       // Assengo estremi del sentiero
@@ -26,23 +29,15 @@ export const useFindOffroadRoute = () => {
       setTrailEndCoords(trailEndCoords);
       // Definisco percorso fuori sentiero
       setOffroadNodes([...closerTrail.nodes, destinationCoords]);
+      setOffroadDistance(closerTrail.distance);
       setOffroadDuration(closerTrail.duration);
       setOffroadElevationGain(
         calculateElevationGain(trailEndCoords[2], destinationCoords[2])
       );
 
-      // TEMP: Mostro dati relativi al calcolo
-      // offroadNodesLayer.setSource(
-      //   createNodesVectorSource(
-      //     closerTrail.graph.reduce((acc, nodes) => [...acc, ...nodes], [])
-      //   )
-      // );
-      // offroadWaysLayer.setSource(
-      //   createWaysVectorSource(offroadNodess.map((path) => path.nodes))
-      // );
-      // offroadGraphLayer.setSource(
-      //   createNodesVectorSource(closerTrail.graph)
-      // );
+      // Salvo dati relativi al calcolo
+      setOffroadArchs(closerTrail.archs);
+      setOffroadGraph(closerTrail.graph);
 
       // Restituisco coordinate ultimo punto sul sentiero
       return trailEndCoords;

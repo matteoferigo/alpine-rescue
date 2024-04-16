@@ -1,6 +1,11 @@
-export const formatTime = (seconds: number) => {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
+export const formatTime = (time: number) => {
+  const hours = Math.floor(time / 3600);
+  const minutes = Math.floor((time % 3600) / 60);
+  const seconds = Math.floor(time % 60);
 
-  return `${hours}h ${minutes.toString().padStart(2, "0")}m`;
+  return (
+    (hours ? `${hours}h ` : "") +
+    `${minutes.toString().padStart(2, "0")}m ` +
+    `${seconds.toString().padStart(2, "0")}s`
+  );
 };

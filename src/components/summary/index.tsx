@@ -6,8 +6,8 @@ import type { SummaryComponentProps } from "@/components/summary/types";
 const SummaryComponent = ({ open }: SummaryComponentProps) => {
   return (
     <aside
-      className={`bg-white fixed top-0 right-0 w-[500px] h-full px-7 py-10 box-border space-y-10 transition duration-300 ${
-        open ? "translate-x-0 ease-in" : "translate-x-full ease-out"
+      className={`text-gray-900 dark:text-white bg-white dark:bg-gray-900 h-screen overflow-x-auto py-10 box-border space-y-10 transition-width duration-300 ${
+        open ? "w-[900px] px-7 ease-in" : "w-0 px-0 ease-out"
       }`}
     >
       <SummaryOffroadRoute />

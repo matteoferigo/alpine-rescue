@@ -9,11 +9,13 @@ export function calculatePathAStar(graph: Coordinate[][]) {
   const firstNode = graph.at(0)![0];
   const lastNode = graph.at(-1)![0];
   const firstNodes: WeightedPath = {
+    distance: 0,
     duration: 0,
     nodes: [firstNode],
     archs: [],
   };
   const lastNodes: WeightedPath = {
+    distance: 0,
     duration: 0,
     nodes: [lastNode],
     archs: [],
@@ -39,6 +41,7 @@ export function calculatePathAStar(graph: Coordinate[][]) {
     const nextLastArch = nextLast.archs[1];
 
     // Appendo migliori nodi al grafo
+    lastNodes.distance += nextLastArch.distance;
     lastNodes.duration += nextLastArch.duration;
     lastNodes.nodes.unshift(nextLastNode);
     lastNodes.archs.unshift(nextLastArch);
@@ -59,6 +62,7 @@ export function calculatePathAStar(graph: Coordinate[][]) {
       const nextFirstArch = nextFirst.archs[0];
 
       // Appendo migliori nodi al grafo
+      firstNodes.distance += nextFirstArch.distance;
       firstNodes.duration += nextFirstArch.duration;
       firstNodes.nodes.push(nextFirstNode);
       firstNodes.archs.push(nextFirstArch);
@@ -67,6 +71,7 @@ export function calculatePathAStar(graph: Coordinate[][]) {
 
   // Combino i due grafi
   return {
+    distance: firstNodes.distance + lastNodes.distance,
     duration: firstNodes.duration + lastNodes.duration,
     nodes: [...firstNodes.nodes, ...lastNodes.nodes],
     archs: [...firstNodes.archs, ...lastNodes.archs],
@@ -89,6 +94,7 @@ function getBestNode(
 
     if (!acc || acc.duration > duration) {
       return {
+        distance: fromArch.distance + toArch.distance,
         duration: fromArch.duration + toArch.duration,
         nodes: [node],
         archs: [fromArch, toArch],

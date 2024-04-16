@@ -39,14 +39,16 @@ export default function Home() {
         <OffroadRouteProvider>
           <DriveRouteProvider>
             <HelicopterRouteProvider>
-              <Map
-                center={centerCoords}
-                zoom={initialZoom}
-                searching={searching}
-                onSearchStart={onSearchStart}
-                onSearchEnd={onSearchEnd}
-              />
-              <SummaryComponent open={showResults} />
+              <div className="flex">
+                <Map
+                  center={centerCoords}
+                  zoom={initialZoom}
+                  searching={searching}
+                  onSearchStart={onSearchStart}
+                  onSearchEnd={onSearchEnd}
+                />
+                <SummaryComponent open={showResults} />
+              </div>
               <WeatherSummary />
             </HelicopterRouteProvider>
           </DriveRouteProvider>

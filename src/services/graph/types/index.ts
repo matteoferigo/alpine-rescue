@@ -17,9 +17,11 @@ export type WeightedArch = {
   duration: number;
   elevation: number;
   slope: number;
+  speed: number;
 };
 
 export type WeightedPath = {
+  distance: number;
   duration: number;
   nodes: Coordinate[];
   archs: WeightedArch[];

@@ -24,7 +24,7 @@ export const useMap = ({ center, zoom, layers, onClick }: MapHookOptions) => {
       layers,
     });
 
-    // TEMP: use ArcGis
+    // Uso mappa ArcGis
     // const basemapId = "arcgis/outdoor";
     // apply(map, `api/arcgis/styles/${basemapId}`);
 
