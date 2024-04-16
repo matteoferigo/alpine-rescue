@@ -32,6 +32,14 @@ const nextConfig = {
 				source: '/api/opentopo',
 				destination: `${env.OPENTOPO_API_URL}`,
 			},
+			{
+				source: '/openweather/icon/:icon',
+				destination: `${env.OPENWEATHER_ICON_URL}/:icon`,
+			},
+			{
+				source: '/api/openweather/:path*',
+				destination: `${env.OPENWEATHER_API_URL}/:path*?appid=${env.OPENWEATHER_API_KEY}`,
+			},
 		]
 	}
 };

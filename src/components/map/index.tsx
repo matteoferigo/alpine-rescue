@@ -8,6 +8,7 @@ import { useFindDriveRoute } from "@/hooks/route/find/drive";
 import { useFindHelicopterRoute } from "@/hooks/route/find/helicopter";
 import { useFindCloserHospital } from "@/hooks/route/find/hospital";
 import { useFindOffroadRoute } from "@/hooks/route/find/offroad";
+import { useLoadCurrentWeather } from "@/hooks/weather/current";
 import { coordinateTransform } from "@/services/map/coordinate/transform";
 import { createNodeFeatures } from "@/services/map/features/node";
 import { setFeaturesStyle } from "@/services/map/features/style";
@@ -55,6 +56,8 @@ const MapComponent = ({
   const findDriveRoute = useFindDriveRoute();
   const findHelicopterRoute = useFindHelicopterRoute();
 
+  const loadCurrentWeather = useLoadCurrentWeather();
+
   // Definisco data-layer della mappa
   const nodesLayer = useVectorLayer(pointStyle, 10);
   const routesLayer = useVectorLayer(routeStyle);
@@ -78,11 +81,12 @@ const MapComponent = ({
       Promise.all([
         findOffroadRoute(emergencyCoords),
         findCloserHospital(emergencyCoords),
+        loadCurrentWeather(emergencyCoords),
       ])
-        .then(([trailEndCoords, hospitalCoords]) =>
+        .then(([trailEndCoords, hospitalCoords, weather]) =>
           Promise.all([
             findDriveRoute(hospitalCoords!, trailEndCoords!),
-            findHelicopterRoute(hospitalCoords!, trailEndCoords!),
+            findHelicopterRoute(hospitalCoords!, trailEndCoords!, weather),
           ])
         )
         .finally(() => {

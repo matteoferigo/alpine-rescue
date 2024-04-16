@@ -3,10 +3,12 @@
 import Map from "@/components/map";
 import Spinner from "@/components/spinner";
 import SummaryComponent from "@/components/summary";
+import WeatherSummary from "@/components/summary/weather";
 import { PALA_NORDEST } from "@/const/nodes";
 import DriveRouteProvider from "@/contexts/route/drive/provider";
 import HelicopterRouteProvider from "@/contexts/route/helicopter/provider";
 import OffroadRouteProvider from "@/contexts/route/offroad/provider";
+import WeatherProvider from "@/contexts/weather/provider";
 import { fromLonLat } from "ol/proj";
 import { useState } from "react";
 
@@ -33,20 +35,23 @@ export default function Home() {
           <Spinner />
         </div>
       )}
-      <OffroadRouteProvider>
-        <DriveRouteProvider>
-          <HelicopterRouteProvider>
-            <Map
-              center={centerCoords}
-              zoom={initialZoom}
-              searching={searching}
-              onSearchStart={onSearchStart}
-              onSearchEnd={onSearchEnd}
-            />
-            <SummaryComponent open={showResults} />
-          </HelicopterRouteProvider>
-        </DriveRouteProvider>
-      </OffroadRouteProvider>
+      <WeatherProvider>
+        <OffroadRouteProvider>
+          <DriveRouteProvider>
+            <HelicopterRouteProvider>
+              <Map
+                center={centerCoords}
+                zoom={initialZoom}
+                searching={searching}
+                onSearchStart={onSearchStart}
+                onSearchEnd={onSearchEnd}
+              />
+              <SummaryComponent open={showResults} />
+              <WeatherSummary />
+            </HelicopterRouteProvider>
+          </DriveRouteProvider>
+        </OffroadRouteProvider>
+      </WeatherProvider>
     </main>
   );
 }
