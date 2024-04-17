@@ -2,7 +2,7 @@ import type { WeightedArch } from "@/services/graph/types";
 import { getSpeedAvg } from "@/services/path/speed/avg";
 import { calculateElevationGain } from "@/services/path/way/elevation-gain";
 import { calculateWayLength } from "@/services/path/way/length";
-import { calculateWaySlope } from "@/services/path/way/slope";
+import { calculateSlope } from "@/services/path/way/slope";
 import { calculateWayTimeEstimation } from "@/services/path/way/time-estimation";
 import type { Coordinate } from "ol/coordinate";
 
@@ -14,7 +14,7 @@ export function calculateArchWeight(
   const elevation = calculateElevationGain(fromNode[2], toNode[2]);
   const descending = fromNode[2] > toNode[2];
   const distance = calculateWayLength(fromNode, toNode, elevation);
-  const slope = calculateWaySlope(distance, elevation);
+  const slope = calculateSlope(distance, elevation);
   const speed = getSpeedAvg(slope, descending);
 
   // Calcolo il peso dell'arco (in secondi)

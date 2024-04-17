@@ -89,27 +89,43 @@ const ElevationProfile = ({
     ctx.strokeStyle = "rgb(0, 149, 255)";
     ctx.stroke();
 
-    // Rappresento i due punti di inizio/fine percorso
-    const fromX = padding + 2;
-    const fromY = padding + (maxElevation - elevations[0]) * ratio;
+    // Rappresento il nodo di partenza
+    x = padding + 2;
+    y = padding + (maxElevation - elevations[0]) * ratio;
+
     ctx.beginPath();
     ctx.setLineDash([1]);
-    ctx.arc(fromX, fromY, 4, 0, 2 * Math.PI);
+    ctx.arc(x, y, 4, 0, 2 * Math.PI);
     ctx.strokeStyle = "rgb(0, 149, 255)";
     ctx.stroke();
+
     ctx.beginPath();
-    ctx.arc(fromX, fromY, 2, 0, 2 * Math.PI);
+    ctx.arc(x, y, 2, 0, 2 * Math.PI);
     ctx.strokeStyle = "white";
     ctx.stroke();
 
-    const toX = x - 2;
-    const toY = y;
+    // Rappresento i nodi intermedi
+    for (let i = 1; i < nodes.length - 1; i++) {
+      x += distances[i - 1] * ratio;
+      y = padding + (maxElevation - elevations[i]) * ratio;
+
+      ctx.beginPath();
+      ctx.arc(x, y, 2, 0, 2 * Math.PI);
+      ctx.strokeStyle = "rgb(0, 149, 255)";
+      ctx.stroke();
+    }
+
+    // Rappresento il nodo di arrivo
+    x += distances.at(-1)! * ratio - 2;
+    y = padding + (maxElevation - elevations.at(-1)!) * ratio;
+
     ctx.beginPath();
-    ctx.arc(toX, toY, 4, 0, 2 * Math.PI);
+    ctx.arc(x, y, 4, 0, 2 * Math.PI);
     ctx.strokeStyle = "black";
     ctx.stroke();
+
     ctx.beginPath();
-    ctx.arc(toX, toY, 2, 0, 2 * Math.PI);
+    ctx.arc(x, y, 2, 0, 2 * Math.PI);
     ctx.strokeStyle = "white";
     ctx.stroke();
 

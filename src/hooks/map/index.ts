@@ -1,3 +1,4 @@
+// import apply from "ol-mapbox-style";
 import Map from "ol/Map";
 import type MapBrowserEvent from "ol/MapBrowserEvent";
 import View from "ol/View";

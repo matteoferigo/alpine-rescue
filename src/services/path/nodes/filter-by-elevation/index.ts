@@ -6,7 +6,5 @@ export const filterNodesByElevation = (
   higher: number
 ) => {
   // Recupero i punti che seguono il livello di altitudine
-  return nodes.filter(
-    ([elevation]) => elevation >= lower && elevation <= higher
-  );
+  return nodes.filter((node) => node[2] >= lower && node[2] <= higher);
 };

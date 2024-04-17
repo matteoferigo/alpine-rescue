@@ -7,6 +7,7 @@ export function calculatePathAStarFromBottom(graph: Coordinate[][]) {
   const firstNode = graph.at(0)![0];
   const lastNode = graph.at(-1)![0];
   const lastNodes: WeightedPath = {
+    distance: 0,
     duration: 0,
     nodes: [lastNode],
     archs: [],
@@ -62,6 +63,7 @@ function getBestNode(
 
     if (!acc || acc.duration > duration) {
       return {
+        distance: fromArch.distance + toArch.distance,
         duration: fromArch.duration + toArch.duration,
         nodes: [node],
         archs: [fromArch, toArch],

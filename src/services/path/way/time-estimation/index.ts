@@ -1,20 +1,20 @@
 import { UPHILL_SPEED } from "@/const/speed";
 import { getSpeedAvg } from "@/services/path/speed/avg";
-import { calculateWaySlope } from "@/services/path/way/slope";
+import { calculateSlope } from "@/services/path/way/slope";
 
 export const calculateWayTimeEstimation = (
   distance: number,
-  elevation: number,
+  elevationGain: number,
   descending: boolean
 ) => {
   // Restituisco valore se percorso in piano
-  if (!elevation) {
+  if (!elevationGain) {
     const speed = UPHILL_SPEED[0];
-    return Math.round(distance * speed.ms);
+    return Math.round(distance / speed.ms);
   }
 
   // Recupero la velocità media
-  const slope = calculateWaySlope(distance, elevation);
+  const slope = calculateSlope(distance, elevationGain);
   const speed = getSpeedAvg(slope, descending);
 
   // Calcolo il tempo di percorrenza (in secondi)
