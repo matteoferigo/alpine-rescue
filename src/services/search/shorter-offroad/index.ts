@@ -3,6 +3,7 @@ import { calculatePathAStar } from "@/services/graph/calculate/path/a-star";
 import { createGraphFrom2Points } from "@/services/graph/create/from-points";
 import { sortNodesByDistance } from "@/services/path/nodes/sort-by-distance";
 import { searchCloserNodes } from "@/services/search/closer-nodes";
+import { searchTerrainPolygons } from "@/services/search/terrain-polygons";
 import type { Coordinate } from "ol/coordinate";
 
 // Graph matrix
@@ -16,7 +17,11 @@ export async function searchShorterOffroad(
 ) {
   try {
     // Cerco sentieri vicini (seleziono nodi più vicini)
-    const closerNodes = await searchCloserNodes(destination, maxDistance);
+    const [closerNodes, terrainPolygons] = await Promise.all([
+      searchCloserNodes(destination, maxDistance),
+      // Recupero i tipi di terreni nella zona
+      searchTerrainPolygons(destination, maxDistance),
+    ]);
     const nodesByDistance = sortNodesByDistance(
       closerNodes,
       destination,
@@ -42,7 +47,7 @@ export async function searchShorterOffroad(
         );
 
         // Calcolo pesi degli archi (percorrenza in secondi)
-        const bestPath = calculatePathAStar(graph);
+        const bestPath = calculatePathAStar(graph, terrainPolygons);
 
         // Restituisco il percorso migliore
         return {

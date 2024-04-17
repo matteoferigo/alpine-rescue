@@ -2,9 +2,13 @@ import { calculateArchWeight } from "@/services/graph/calculate/weight";
 import type { WeightedPath } from "@/services/graph/types";
 import { filterNodesByElevation } from "@/services/path/nodes/filter-by-elevation";
 import { sortNodesByElevation } from "@/services/path/nodes/sort-by-elevation";
+import type { TerrainPolygon } from "@/services/terrain/types";
 import type { Coordinate } from "ol/coordinate";
 
-export function calculatePathAStar(graph: Coordinate[][]) {
+export function calculatePathAStar(
+  graph: Coordinate[][],
+  terrains: TerrainPolygon[]
+) {
   // Parto dagli estremi
   const firstNode = graph.at(0)![0];
   const lastNode = graph.at(-1)![0];
@@ -36,7 +40,7 @@ export function calculatePathAStar(graph: Coordinate[][]) {
 
     // Recupero miglior nodo, riducendo la profondità del grafo
     const nextLastNodes = filterNodes(nextLastLeaves, toNode, fromNode);
-    const nextLast = getBestNode(nextLastNodes, fromNode, toNode);
+    const nextLast = getBestNode(nextLastNodes, fromNode, toNode, terrains);
     const nextLastNode = nextLast.nodes[0];
     const nextLastArch = nextLast.archs[1];
 
@@ -57,7 +61,12 @@ export function calculatePathAStar(graph: Coordinate[][]) {
         fromNode,
         nextLastNode
       );
-      const nextFirst = getBestNode(nextFirstNodes, fromNode, nextLastNode);
+      const nextFirst = getBestNode(
+        nextFirstNodes,
+        fromNode,
+        nextLastNode,
+        terrains
+      );
       const nextFirstNode = nextFirst.nodes[0];
       const nextFirstArch = nextFirst.archs[0];
 
@@ -81,13 +90,14 @@ export function calculatePathAStar(graph: Coordinate[][]) {
 function getBestNode(
   nodes: Coordinate[],
   fromNode: Coordinate,
-  toNode: Coordinate
+  toNode: Coordinate,
+  terrains: TerrainPolygon[]
 ) {
   return nodes.reduce((acc: WeightedPath | null, node) => {
     // Calcolo la percorrenza fino al nodo
-    const fromArch = calculateArchWeight(fromNode, node);
+    const fromArch = calculateArchWeight(fromNode, node, terrains);
     // Stimo la percorrenza fino all'ultimo nodo
-    const toArch = calculateArchWeight(node, toNode);
+    const toArch = calculateArchWeight(node, toNode, terrains);
 
     // Scelgo il nodo con minor tempo di percorrenza
     const duration = fromArch.duration + toArch.duration;

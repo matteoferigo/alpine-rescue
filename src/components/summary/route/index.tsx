@@ -56,7 +56,17 @@ const RouteArchsTable = ({
               1
             )} m`}</td>
             <td className="px-3 py-4 space-x-1">
-              <span className="text-xs">{arch.slope > 50 ? "🧗" : "🥾"}</span>
+              <span className="text-xs">
+                {arch.slope > 50
+                  ? "🧗"
+                  : arch.terrain.includes("wood")
+                  ? "🌳"
+                  : arch.terrain.includes("rock")
+                  ? "🪨"
+                  : arch.terrain.includes("scree")
+                  ? "🌿"
+                  : "🥾"}
+              </span>
               <span>{` ${arch.speed.toFixed(1)} m/s`}</span>
             </td>
             <td className="px-3 py-4 space-x-1 text-right">

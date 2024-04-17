@@ -18,6 +18,7 @@ export type WeightedArch = {
   elevation: number;
   slope: number;
   speed: number;
+  terrain: string[];
 };
 
 export type WeightedPath = {
