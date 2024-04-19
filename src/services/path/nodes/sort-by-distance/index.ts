@@ -12,7 +12,7 @@ export const sortNodesByDistance = (
       coordinate,
       distance: getDistance(coordinate, toNode),
     }))
-    .toSorted((a, b) => a.distance - b.distance);
+    .sort((a, b) => a.distance - b.distance);
 
   // Restituisco solo coordinate
   return sortedNodes.slice(0, maxNodes).map(({ coordinate }) => coordinate);

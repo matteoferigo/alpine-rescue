@@ -13,7 +13,7 @@ export const searchTerrainNearby = async (
   const point = `${node[1]},${node[0]}`;
 
   // https://dev.overpass-api.de/overpass-doc/en/full_data/osm_types.html
-  const query = `rel(around:${distance},${point})${landuseTagFilter};(way(r)${landuseTagFilter};way(around:${distance},${point})${naturalTagFilter};);out geom tags;`;
+  const query = `(way(around:${distance},${point})${landuseTagFilter};way(around:${distance},${point})${naturalTagFilter};);out geom tags;`;
 
   return overpassRequest<GeomNoIdsOutput>(query);
 };

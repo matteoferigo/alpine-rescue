@@ -27,6 +27,7 @@ export async function searchShorterOffroad(
       destination,
       altRoutes
     );
+    console.debug("Offroad Terrain: polygons", terrainPolygons);
 
     // Estraggo i nodi con relative altitudini
     const [destNode, ...nodes] = await getElevations([
@@ -58,9 +59,7 @@ export async function searchShorterOffroad(
     );
 
     // Estraggo il percorso migliore
-    const shorterArchs = archWithNodes.toSorted(
-      (a, b) => a.duration - b.duration
-    );
+    const shorterArchs = archWithNodes.sort((a, b) => a.duration - b.duration);
     console.debug("Offroad Paths: stima accurata", shorterArchs);
 
     return shorterArchs;

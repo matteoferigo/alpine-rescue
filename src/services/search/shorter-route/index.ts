@@ -30,7 +30,7 @@ export async function searchShorterRoute(
         nodes[getDistance(trailheadPoint, startRoadPoint)] = node;
       });
       closerTrailheads = Object.keys(nodes)
-        .toSorted((a, b) => +a - +b)
+        .sort((a, b) => +a - +b)
         .slice(0, 10)
         .map((key) => nodes[key]);
     }

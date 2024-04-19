@@ -6,6 +6,10 @@ import type { Coordinate } from "ol/coordinate";
 
 // https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL#out
 
+export type GeomTagsOutput = {
+  tags: Tags;
+};
+
 export type GeomNoIdsOutput = {
   type: OSMType;
   bounds: Bounds;

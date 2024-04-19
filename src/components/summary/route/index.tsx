@@ -39,7 +39,10 @@ const RouteArchsTable = ({
             className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
           >
             <th className="px-3 py-4 space-x-1 font-semibold">
-              {`${arch.fromNode[2].toFixed(0)} mslm`}
+              <dt title={`${arch.fromNode[1]},${arch.fromNode[0]}`}>
+                {`${arch.fromNode[2].toFixed(0)} mslm`}
+              </dt>
+              <dd className="hidden">{`${arch.fromNode[1]},${arch.fromNode[0]}`}</dd>
             </th>
             <td className="px-3 py-4 space-x-1">
               {!arch.elevation ? (
@@ -78,7 +81,10 @@ const RouteArchsTable = ({
       <tfoot>
         <tr className="font-semibold text-gray-900 dark:text-white">
           <th className="px-3 py-4 space-x-1 font-semibold">
-            {`${toNode[2].toFixed(0)} mslm`}
+            <dt title={`${toNode[1]},${toNode[0]}`}>
+              {`${toNode[2].toFixed(0)} mslm`}
+            </dt>
+            <dd className="hidden">{`${toNode[1]},${toNode[0]}`}</dd>
           </th>
           <td className="px-3 py-4 space-x-1">
             {!elevationGain ? (

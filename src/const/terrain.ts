@@ -1,3 +1,5 @@
+// https://wiki.openstreetmap.org/wiki/Key:natural
+
 // Velocità media in base a conformazione terreno
 export const TERRAIN_SPEED = [
   {

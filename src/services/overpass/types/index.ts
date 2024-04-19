@@ -3,6 +3,7 @@ import type {
   GeomOutput,
 } from "@/services/overpass/types/geom";
 import type { NodeOutput } from "@/services/overpass/types/node";
+import type { RelationOutput } from "@/services/overpass/types/rel";
 
 export type OverpassResponse<T extends OverpassResponseElement> = {
   version: number;
@@ -14,4 +15,8 @@ export type OverpassResponse<T extends OverpassResponseElement> = {
   elements: T[];
 };
 
-export type OverpassResponseElement = GeomNoIdsOutput | GeomOutput | NodeOutput;
+export type OverpassResponseElement =
+  | GeomNoIdsOutput
+  | GeomOutput
+  | NodeOutput
+  | RelationOutput;

@@ -11,7 +11,7 @@ export async function overpassRequest<T extends OverpassResponseElement>(
   query: string
 ) {
   const payload = `[out:json];${query}`;
-  console.debug("Overpass API Request", payload); // TODO: remove
+  console.debug("Overpass API Request", payload);
 
   const result = await fetch(
     `/api/overpass?data=${encodeURIComponent(payload)}`

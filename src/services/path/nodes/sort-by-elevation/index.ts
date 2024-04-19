@@ -12,7 +12,7 @@ export const sortNodesByElevation = (
       coordinate,
       elevation: calculateElevationGain(coordinate[2], toNode[2]),
     }))
-    .toSorted((a, b) => a.elevation - b.elevation);
+    .sort((a, b) => a.elevation - b.elevation);
 
   // Restituisco solo coordinate
   return sortedNodes.slice(0, maxNodes).map(({ coordinate }) => coordinate);
