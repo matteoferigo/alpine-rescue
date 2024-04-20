@@ -1,5 +1,6 @@
 "use client";
 
+import HamburgerButton from "@/components/close-button";
 import Map from "@/components/map";
 import Spinner from "@/components/spinner";
 import SummaryComponent from "@/components/summary";
@@ -48,6 +49,12 @@ export default function Home() {
                   onSearchEnd={onSearchEnd}
                 />
                 <SummaryComponent open={showResults} />
+                <div className="absolute top-2 right-2 md:top-4 md:right-6">
+                  <HamburgerButton
+                    open={showResults}
+                    onClick={() => setShowResults((prev) => !prev)}
+                  />
+                </div>
               </div>
               <WeatherSummary />
             </HelicopterRouteProvider>
