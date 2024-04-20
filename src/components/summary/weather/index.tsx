@@ -7,7 +7,7 @@ const WeatherSummary = () => {
 
   return (
     isReady && (
-      <div className="fixed left-2 bottom-2 pr-2 bg-white rounded border-gray-300 dark:bg-gray-800 dark:border-gray-700 flex items-center">
+      <div className="fixed right-2 top-2 md:right-auto md:top-auto md:left-2 md:bottom-2 pr-2 bg-white rounded border-gray-300 dark:bg-gray-800 dark:border-gray-700 flex items-center">
         <Image src={weatherIcon!} width={30} height={30} alt="Meteo" />
         <span className="text-sm text-gray-500 dark:text-gray-400">{`${temperature}°C`}</span>
       </div>

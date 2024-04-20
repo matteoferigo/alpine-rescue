@@ -161,7 +161,7 @@ const MapComponent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searching]);
 
-  return <div ref={ref} className="w-full h-screen" />;
+  return <div ref={ref} className="w-full flex-1 md:h-screen" />;
 };
 
 export default MapComponent;

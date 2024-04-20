@@ -39,7 +39,7 @@ export default function Home() {
         <OffroadRouteProvider>
           <DriveRouteProvider>
             <HelicopterRouteProvider>
-              <div className="flex">
+              <div className="flex flex-col md:flex-row w-screen h-screen">
                 <Map
                   center={centerCoords}
                   zoom={initialZoom}

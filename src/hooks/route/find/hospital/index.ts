@@ -1,8 +1,7 @@
 import { useDriveRouteContext } from "@/contexts/route/drive/hooks";
 import { useHelicopterRouteContext } from "@/contexts/route/helicopter/hooks";
 import { useShowErrorMessage } from "@/hooks/error/message";
-// import { searchCloserRescuePoint } from "@/services/search/closer-rescue";
-import { OSPEDALE_CORTINA_PUTTI } from "@/const/nodes";
+import { searchCloserRescuePoint } from "@/services/search/closer-rescue";
 import type { Coordinate } from "ol/coordinate";
 
 export const useFindCloserHospital = () => {
@@ -13,8 +12,7 @@ export const useFindCloserHospital = () => {
   return async function (destinationCoords: Coordinate) {
     try {
       // Cerco ospedale più vicino
-      // const closerHospital = await searchCloserRescuePoint(destinationCoords);
-      const closerHospital = OSPEDALE_CORTINA_PUTTI; // TEMP: mock della chiamata
+      const closerHospital = await searchCloserRescuePoint(destinationCoords);
 
       // Assegno valori di partenza per le rotte
       setDepartureCoords(closerHospital);
