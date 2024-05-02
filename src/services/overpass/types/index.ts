@@ -1,3 +1,4 @@
+import type { CenterOutput } from "@/services/overpass/types/center";
 import type {
   GeomNoIdsOutput,
   GeomOutput,
@@ -18,5 +19,6 @@ export type OverpassResponse<T extends OverpassResponseElement> = {
 export type OverpassResponseElement =
   | GeomNoIdsOutput
   | GeomOutput
+  | CenterOutput
   | NodeOutput
   | RelationOutput;

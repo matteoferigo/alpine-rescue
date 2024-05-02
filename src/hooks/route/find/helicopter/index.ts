@@ -9,12 +9,14 @@ import { getFootDirections } from "@/services/openroute/directions/foot";
 import type { OpenWeatherResponse } from "@/services/openweather/types/weather";
 import { calculateElevationGain } from "@/services/path/way/elevation-gain";
 import { searchCloserHelipadPoint } from "@/services/search/closer-helipad";
+import { searchCloserHeliportPoint } from "@/services/search/closer-heliport";
 import type { Coordinate } from "ol/coordinate";
 import { getDistance } from "ol/sphere";
 
 export const useFindHelicopterRoute = () => {
   const showError = useShowErrorMessage();
   const {
+    setHeliportCoords,
     setHelipadCoords,
     setTrailPath,
     setFlightPath,
@@ -31,18 +33,25 @@ export const useFindHelicopterRoute = () => {
   ) {
     try {
       // Cerco elisuperfici vicine
-      const closerHelipad = await searchCloserHelipadPoint(toPoint);
+      const [closerHeliport, closerHelipad] = await Promise.all([
+        searchCloserHeliportPoint(fromPoint),
+        searchCloserHelipadPoint(toPoint),
+      ]);
 
       // Definisco volo
+      setHeliportCoords(closerHeliport);
       setHelipadCoords(closerHelipad);
-      setFlightPath(createWayFeatures([fromPoint, closerHelipad]));
+      setFlightPath(createWayFeatures([closerHeliport, closerHelipad]));
       // Calcolo le altitudini
-      const elevations = await getElevations([fromPoint, closerHelipad]);
-      fromPoint[2] = elevations[0].elevation;
+      const elevations = await getElevations([closerHeliport, closerHelipad]);
+      closerHeliport[2] = elevations[0].elevation;
       closerHelipad[2] = elevations[1].elevation;
       // Calcolo tempo di percorrenza
-      const distance = getDistance(fromPoint, closerHelipad);
-      const elevation = calculateElevationGain(fromPoint[2], closerHelipad[2]);
+      const distance = getDistance(closerHeliport, closerHelipad);
+      const elevation = calculateElevationGain(
+        closerHeliport[2],
+        closerHelipad[2]
+      );
       setFlightDuration(
         calculateHelicopterTimeEstimation(distance, elevation, weather)
       );

@@ -1,4 +1,4 @@
-import { getWayCloserNode } from "@/services/path/way/closer-node";
+import { getCloserNode } from "@/services/path/way/closer-node";
 import { searchTrailsNearby } from "@/services/requests/trails/nearby";
 import type { Coordinate } from "ol/coordinate";
 
@@ -13,7 +13,7 @@ export const searchCloserNodesByWays = async (
 
   // Selezioni i nodi più vicini per ogni sentiero
   return closerWays.map((way) => {
-    const node = getWayCloserNode(way.geometry, destination);
+    const node = getCloserNode(way.geometry, destination);
     return node.coordinate;
   });
 };

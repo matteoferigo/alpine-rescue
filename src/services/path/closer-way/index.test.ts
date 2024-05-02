@@ -1,16 +1,16 @@
 import type { LatLon } from "@/services/overpass/types/latlon";
 import type { OSMType } from "@/services/overpass/types/osm-type";
 import { getCloserWay } from "@/services/path/closer-way";
-import { getWayCloserNode } from "@/services/path/way/closer-node";
+import { getCloserNode } from "@/services/path/way/closer-node";
 import type { Coordinate } from "ol/coordinate";
 
 jest.mock("@/services/path/way/closer-node", () => ({
-  getWayCloserNode: jest.fn(),
+  getCloserNode: jest.fn(),
 }));
 
 describe("getCloserWay", () => {
   beforeAll(() => {
-    (getWayCloserNode as jest.Mock).mockImplementation(
+    (getCloserNode as jest.Mock).mockImplementation(
       (geometry: LatLon[], to: Coordinate) => {
         const from = [geometry[0].lon, geometry[0].lat];
         const distance = from[0] > to[0] ? from[0] - to[0] : to[0] - from[0];

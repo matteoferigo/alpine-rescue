@@ -46,6 +46,7 @@ const MapComponent = ({
     roadPath,
   } = useDriveRouteContext();
   const {
+    heliportCoords,
     helipadCoords,
     trailPath: helicopterTrailPath,
     flightPath,
@@ -119,6 +120,14 @@ const MapComponent = ({
           ...setFeaturesStyle(
             createNodeFeatures(trailheadCoords),
             trailheadPointStyle
+          )
+        );
+      }
+      if (heliportCoords) {
+        nodesFeatures.push(
+          ...setFeaturesStyle(
+            createNodeFeatures(heliportCoords),
+            helipadPointStyle
           )
         );
       }

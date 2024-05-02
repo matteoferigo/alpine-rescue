@@ -1,5 +1,5 @@
 import type { LatLon } from "@/services/overpass/types/latlon";
-import { getWayCloserNode } from "@/services/path/way/closer-node";
+import { getCloserNode } from "@/services/path/way/closer-node";
 import type { Coordinate } from "ol/coordinate";
 import { getDistance } from "ol/sphere";
 
@@ -7,7 +7,7 @@ jest.mock("ol/sphere", () => ({
   getDistance: jest.fn(),
 }));
 
-describe("getWayCloserNode", () => {
+describe("getCloserNode", () => {
   const geometry: LatLon[] = [
     { lat: 11.123, lon: 1.123 },
     { lat: 12.123, lon: 2.123 },
@@ -28,7 +28,7 @@ describe("getWayCloserNode", () => {
 
   it("should return distance in meters", () => {
     const point = [3.0, 13.0];
-    expect(getWayCloserNode(geometry, point)).toEqual({
+    expect(getCloserNode(geometry, point)).toEqual({
       coordinate: [3.123, 13.123],
       distance: 0.123,
     });
