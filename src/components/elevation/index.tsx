@@ -130,7 +130,7 @@ const ElevationProfile = ({
     ctx.stroke();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [nodes]);
 
   return (
     <canvas ref={ref} className={className} width={width} height={height} />

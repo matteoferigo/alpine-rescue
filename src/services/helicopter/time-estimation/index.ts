@@ -1,40 +1,46 @@
-import { getHelicopterRiseTime } from "@/services/helicopter/rise-time";
+import { getHelicopterAcceleration } from "@/services/helicopter/acceleration";
 import { getHelicopterSpeed } from "@/services/helicopter/speed";
-import { calculateWindFactor } from "@/services/helicopter/wind-factor";
 import type { OpenWeatherResponse } from "@/services/openweather/types/weather";
 
 export const calculateHelicopterTimeEstimation = (
   distance: number,
-  elevation: number,
   weather?: OpenWeatherResponse
 ) => {
   // Recupero la velocità di crocera
   const maxSpeed = getHelicopterSpeed();
-  // Calcolo il coefficiente di impatto del vento
-  const windSpeed = weather?.wind.speed;
-  const windFactor = windSpeed ? calculateWindFactor(windSpeed, maxSpeed) : 1;
+  const maxAcceleration = getHelicopterAcceleration();
 
-  // Tempo di salita e discesa (in secondi)
-  const riseTime = getHelicopterRiseTime(elevation);
-  const fallTime = getHelicopterRiseTime(100);
-  // Calcolo tempo di accelerazione (costante)
-  const accelerationTime = maxSpeed / 2;
-  const accelerationDistance = 0.5 * maxSpeed * accelerationTime;
-  // Aggiungo tempo di decelerazione (costante)
-  const decelerationTime = accelerationTime;
-  const decelerationDistance = accelerationDistance;
-  // Calcolo tempo di velocità da crocera
-  if (accelerationDistance + decelerationDistance <= distance) {
-    const cruisingDistance =
-      distance - (accelerationDistance + decelerationDistance);
-    const cruisingTime = cruisingDistance / maxSpeed;
+  // Calcolo la velocità risultante in funzione alla velocità e direzione del vento
+  const windSpeed = weather?.wind.speed ?? 0;
+  // Dato che la direzione del vento e dell'elicottero possono variare
+  // Considero il caso peggiore in cui il vento soffia contro (180°)
+  const windCosine = -1;
+  // Applico la legge dei coseni per calcolare la risultante
+  const speed = !windSpeed
+    ? maxSpeed
+    : Math.sqrt(
+        maxSpeed ** 2 + windSpeed ** 2 + 2 * maxSpeed * windSpeed * windCosine
+      );
 
-    // Calcolo il tempo di percorrenza (in secondi)
-    return (
-      windFactor *
-      (riseTime + accelerationTime + cruisingTime + decelerationTime + fallTime)
-    );
-  }
+  // Calcolo la distanza massima raggiungibile con un accelerazione costante (MUA)
+  const maxDistanceUAM = speed ** 2 / maxAcceleration;
+
+  // Calcolo la distanza da percorrere, peggiorando il percorso ideale in linea d'aria
+  // Considerando i metri di elevazione dal suolo (decollo e ascesa)
+  const totalLength = distance * 1.5 + 2000 + 1000;
+  // Calcolo il tempo impiegato in condizioni ideali
+  let time;
   // Se velocità di crocera non raggiunta
-  return windFactor * (riseTime + Math.sqrt(distance / maxSpeed) + fallTime);
+  if (maxDistanceUAM === totalLength) {
+    time = 2 * (speed / maxAcceleration);
+  } else if (maxDistanceUAM < totalLength) {
+    time = Math.sqrt(totalLength / maxAcceleration);
+    // Se velocità di crocera viene raggiunta
+  } else {
+    const distanceURM = totalLength - maxDistanceUAM;
+    time = 2 * (speed / maxAcceleration) + distanceURM / speed;
+  }
+
+  // Tempo di percorrenza (in secondi) considerando le condizioni metereologiche
+  return time;
 };

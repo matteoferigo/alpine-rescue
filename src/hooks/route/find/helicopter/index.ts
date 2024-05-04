@@ -8,10 +8,10 @@ import { getRouteDuration } from "@/services/openroute/directions/duration";
 import { getFootDirections } from "@/services/openroute/directions/foot";
 import type { OpenWeatherResponse } from "@/services/openweather/types/weather";
 import { calculateElevationGain } from "@/services/path/way/elevation-gain";
+import { calculateWayLength } from "@/services/path/way/length";
 import { searchCloserHelipadPoint } from "@/services/search/closer-helipad";
 import { searchCloserHeliportPoint } from "@/services/search/closer-heliport";
 import type { Coordinate } from "ol/coordinate";
-import { getDistance } from "ol/sphere";
 
 export const useFindHelicopterRoute = () => {
   const showError = useShowErrorMessage();
@@ -47,14 +47,16 @@ export const useFindHelicopterRoute = () => {
       closerHeliport[2] = elevations[0].elevation;
       closerHelipad[2] = elevations[1].elevation;
       // Calcolo tempo di percorrenza
-      const distance = getDistance(closerHeliport, closerHelipad);
       const elevation = calculateElevationGain(
         closerHeliport[2],
         closerHelipad[2]
       );
-      setFlightDuration(
-        calculateHelicopterTimeEstimation(distance, elevation, weather)
+      const distance = calculateWayLength(
+        closerHeliport,
+        closerHelipad,
+        elevation
       );
+      setFlightDuration(calculateHelicopterTimeEstimation(distance, weather));
       setFlightElevationGain(elevation);
 
       // Definisco sentiero
