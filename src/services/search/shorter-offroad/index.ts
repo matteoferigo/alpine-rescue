@@ -1,5 +1,6 @@
 import { getElevations } from "@/services/gmaps/elevation";
-import { calculatePathAStar } from "@/services/graph/calculate/path/a-star";
+import { calculatePathAStarBidirectional } from "@/services/graph/calculate/path/a-star/bidirectional";
+import { calculatePathAStarFromBottom } from "@/services/graph/calculate/path/a-star/from-bottom";
 import { createGraphFrom2Points } from "@/services/graph/create/from-points";
 import { sortNodesByDistance } from "@/services/path/nodes/sort-by-distance";
 import { searchCloserNodes } from "@/services/search/closer-nodes";
@@ -48,21 +49,46 @@ export async function searchShorterOffroad(
         );
 
         // Calcolo pesi degli archi (percorrenza in secondi)
-        const bestPath = calculatePathAStar(graph, terrainPolygons);
+        const bestPathBiridectional = calculatePathAStarBidirectional(
+          graph,
+          terrainPolygons
+        );
+        // (Calcolo alternativa)
+        const bestPathFromBottom = calculatePathAStarFromBottom(
+          graph,
+          terrainPolygons
+        );
 
         // Restituisco il percorso migliore
-        return {
-          ...bestPath,
-          graph,
-        };
+        // (e alternativa)
+        return [
+          {
+            ...bestPathBiridectional,
+            graph,
+          },
+          {
+            ...bestPathFromBottom,
+            graph,
+          },
+        ];
       })
     );
 
     // Estraggo il percorso migliore
-    const shorterArchs = archWithNodes.sort((a, b) => a.duration - b.duration);
-    console.debug("Offroad Paths: stima accurata", shorterArchs);
+    const shorterArchsBidirectional = archWithNodes
+      .sort((a, b) => a[0].duration - b[0].duration)
+      .map((archs) => archs[0]);
+    // (Estraggo alternativa)
+    const shorterArchsFromBottom = archWithNodes
+      .sort((a, b) => a[1].duration - b[1].duration)
+      .map((archs) => archs[1]);
+    console.debug(
+      "Offroad Paths: stima accurata",
+      shorterArchsBidirectional,
+      shorterArchsFromBottom
+    );
 
-    return shorterArchs;
+    return [shorterArchsBidirectional, shorterArchsFromBottom];
   } catch (error) {
     console.warn(`${error}`);
     throw new Error("Non è stato possibile calcolare il percorso fuori strada");

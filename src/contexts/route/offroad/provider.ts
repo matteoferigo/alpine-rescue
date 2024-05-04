@@ -15,6 +15,16 @@ const OffroadRouteProvider = ({ children }: PropsWithChildren) => {
   const [offroadDuration, setOffroadDuration] = useState<number>();
   const [offroadElevationGain, setOffroadElevationGain] = useState<number>();
 
+  // (alternativa)
+  const [offroadAlternativeNodes, setOffroadAlternativeNodes] =
+    useState<Coordinate[]>();
+  const [offroadAlternativeArchs, setOffroadAlternativeArchs] =
+    useState<WeightedArch[]>();
+  const [offroadAlternativeDistance, setOffroadAlternativeDistance] =
+    useState<number>();
+  const [offroadAlternativeDuration, setOffroadAlternativeDuration] =
+    useState<number>();
+
   const value = {
     destinationCoords,
     setDestinationCoords,
@@ -34,6 +44,15 @@ const OffroadRouteProvider = ({ children }: PropsWithChildren) => {
     setOffroadDuration,
     offroadElevationGain,
     setOffroadElevationGain,
+
+    offroadAlternativeNodes,
+    setOffroadAlternativeNodes,
+    offroadAlternativeArchs,
+    setOffroadAlternativeArchs,
+    offroadAlternativeDistance,
+    setOffroadAlternativeDistance,
+    offroadAlternativeDuration,
+    setOffroadAlternativeDuration,
   };
 
   return createElement(OffroadRouteContext.Provider, { value }, children);

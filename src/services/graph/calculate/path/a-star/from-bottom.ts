@@ -1,8 +1,12 @@
 import { calculateArchWeight } from "@/services/graph/calculate/weight";
 import type { WeightedPath } from "@/services/graph/types";
+import type { TerrainPolygon } from "@/services/terrain/types";
 import type { Coordinate } from "ol/coordinate";
 
-export function calculatePathAStarFromBottom(graph: Coordinate[][]) {
+export function calculatePathAStarFromBottom(
+  graph: Coordinate[][],
+  terrains: TerrainPolygon[]
+) {
   // Parto dall'ultimo nodo
   const firstNode = graph.at(0)![0];
   const lastNode = graph.at(-1)![0];
@@ -29,7 +33,7 @@ export function calculatePathAStarFromBottom(graph: Coordinate[][]) {
     );
 
     // Recupero miglior nodo, prima dal fondo
-    const nextLast = getBestNode(nextLastNodes, fromNode, toNode);
+    const nextLast = getBestNode(nextLastNodes, fromNode, toNode, terrains);
     const nextLastNode = nextLast.nodes[0];
     const nextLastArch = nextLast.archs[1];
 
@@ -41,6 +45,7 @@ export function calculatePathAStarFromBottom(graph: Coordinate[][]) {
 
   // Combino i due grafi
   return {
+    distance: lastNodes.distance,
     duration: lastNodes.duration,
     nodes: [firstNode, ...lastNodes.nodes],
     archs: lastNodes.archs,
@@ -50,13 +55,14 @@ export function calculatePathAStarFromBottom(graph: Coordinate[][]) {
 function getBestNode(
   nodes: Coordinate[],
   fromNode: Coordinate,
-  toNode: Coordinate
+  toNode: Coordinate,
+  terrains: TerrainPolygon[]
 ) {
   return nodes.reduce((acc: WeightedPath | null, node) => {
     // Calcolo la percorrenza fino al nodo
-    const fromArch = calculateArchWeight(fromNode, node);
+    const fromArch = calculateArchWeight(fromNode, node, terrains);
     // Stimo la percorrenza fino all'ultimo nodo
-    const toArch = calculateArchWeight(node, toNode);
+    const toArch = calculateArchWeight(node, toNode, terrains);
 
     // Scelgo il nodo con minor tempo di percorrenza
     const duration = fromArch.duration + toArch.duration;

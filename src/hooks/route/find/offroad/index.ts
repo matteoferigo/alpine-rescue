@@ -15,12 +15,18 @@ export const useFindOffroadRoute = () => {
     setOffroadDistance,
     setOffroadDuration,
     setOffroadElevationGain,
+
+    setOffroadAlternativeNodes,
+    setOffroadAlternativeArchs,
+    setOffroadAlternativeDistance,
+    setOffroadAlternativeDuration,
   } = useOffroadRouteContext();
 
   return async function (destinationCoords: Coordinate) {
     try {
       // Cerco sentiero più vicino
-      const offroadNodes = await searchShorterOffroad(destinationCoords, 500);
+      const [offroadNodes, alternativeOffroadNodes] =
+        await searchShorterOffroad(destinationCoords, 500);
       const closerTrail = offroadNodes[0];
       const trailEndCoords = closerTrail.nodes[0];
 
@@ -38,6 +44,12 @@ export const useFindOffroadRoute = () => {
       // Salvo dati relativi al calcolo
       setOffroadArchs(closerTrail.archs);
       setOffroadGraph(closerTrail.graph);
+
+      // (Salvo dati alternativi)
+      setOffroadAlternativeNodes(alternativeOffroadNodes[0].nodes);
+      setOffroadAlternativeArchs(alternativeOffroadNodes[0].archs);
+      setOffroadAlternativeDistance(alternativeOffroadNodes[0].distance);
+      setOffroadAlternativeDuration(alternativeOffroadNodes[0].duration);
 
       // Restituisco coordinate ultimo punto sul sentiero
       return trailEndCoords;

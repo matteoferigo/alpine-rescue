@@ -5,7 +5,7 @@ import { sortNodesByElevation } from "@/services/path/nodes/sort-by-elevation";
 import type { TerrainPolygon } from "@/services/terrain/types";
 import type { Coordinate } from "ol/coordinate";
 
-export function calculatePathAStar(
+export function calculatePathAStarBidirectional(
   graph: Coordinate[][],
   terrains: TerrainPolygon[]
 ) {

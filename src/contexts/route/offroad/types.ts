@@ -21,4 +21,18 @@ export type OffroadRouteContextValue = {
   setOffroadDuration: Dispatch<SetStateAction<number | undefined>>;
   offroadElevationGain: number | undefined;
   setOffroadElevationGain: Dispatch<SetStateAction<number | undefined>>;
+
+  // (alternativa)
+  offroadAlternativeNodes: Coordinate[] | undefined;
+  setOffroadAlternativeNodes: Dispatch<
+    SetStateAction<Coordinate[] | undefined>
+  >;
+  offroadAlternativeArchs: WeightedArch[] | undefined;
+  setOffroadAlternativeArchs: Dispatch<
+    SetStateAction<WeightedArch[] | undefined>
+  >;
+  offroadAlternativeDistance: number | undefined;
+  setOffroadAlternativeDistance: Dispatch<SetStateAction<number | undefined>>;
+  offroadAlternativeDuration: number | undefined;
+  setOffroadAlternativeDuration: Dispatch<SetStateAction<number | undefined>>;
 };
