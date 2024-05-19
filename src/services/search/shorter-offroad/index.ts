@@ -8,9 +8,9 @@ import { searchTerrainPolygons } from "@/services/search/terrain-polygons";
 import type { Coordinate } from "ol/coordinate";
 
 // Graph matrix
-const distanceGap = 10;
-const altNodes = 8;
-const altRoutes = 3;
+const distanceGap = 5;
+const altNodes = 20;
+const altRoutes = 5;
 
 export async function searchShorterOffroad(
   destination: Coordinate,

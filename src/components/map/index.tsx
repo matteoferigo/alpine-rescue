@@ -15,6 +15,7 @@ import { setFeaturesStyle } from "@/services/map/features/style";
 import { createWayFeatures } from "@/services/map/features/way";
 import {
   helipadPointStyle,
+  offroadNodeStyle,
   offroadPointStyle,
   pointStyle,
   trailheadPointStyle,
@@ -37,7 +38,7 @@ const MapComponent = ({
   onSearchStart,
   onSearchEnd,
 }: MapComponentProps) => {
-  const { destinationCoords, trailEndCoords, offroadNodes } =
+  const { destinationCoords, trailEndCoords, offroadNodes, offroadGraph } =
     useOffroadRouteContext();
   const {
     trailheadCoords,
@@ -101,6 +102,18 @@ const MapComponent = ({
     if (!searching) {
       // Mostro nodi sulla mappa
       const nodesFeatures = [];
+      if (offroadGraph) {
+        offroadGraph.forEach((offroadLevel) => {
+          offroadLevel.forEach((alternativeNodeCoords) => {
+            nodesFeatures.push(
+              ...setFeaturesStyle(
+                createNodeFeatures(alternativeNodeCoords),
+                offroadNodeStyle
+              )
+            );
+          });
+        });
+      }
       if (destinationCoords) {
         nodesFeatures.push(...createNodeFeatures(destinationCoords));
       }

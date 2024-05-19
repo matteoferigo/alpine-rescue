@@ -40,7 +40,7 @@ export const offroadPointStyle = new Style({
 
 export const offroadNodeStyle = new Style({
   image: new Circle({
-    radius: 3,
-    fill: new Fill({ color: "rgb(0, 149, 255)" }),
+    radius: 2,
+    fill: new Fill({ color: "rgb(89, 186, 255)" }),
   }),
 });
