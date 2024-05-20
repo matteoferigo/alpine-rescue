@@ -1,0 +1,2 @@
+export const OFFROAD_NODES_DISTANCE = 10;
+export const OFFROAD_NODES_BREADTH = 50;

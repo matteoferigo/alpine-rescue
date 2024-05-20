@@ -1,5 +1,6 @@
 import { overpassRequest } from "@/services/overpass";
 import { hospitalTagFilter } from "@/services/overpass/filters/tags";
+import type { CenterOutput } from "@/services/overpass/types/center";
 import type { NodeOutput } from "@/services/overpass/types/node";
 import type { Coordinate } from "ol/coordinate";
 
@@ -10,7 +11,7 @@ export const searchHospitalNearby = async (
   const point = `${node[1]},${node[0]}`;
 
   // https://dev.overpass-api.de/overpass-doc/en/full_data/osm_types.html
-  const query = `node(around:${distance},${point})${hospitalTagFilter};out geom;`;
+  const query = `nwr(around:${distance},${point})${hospitalTagFilter};out center skel;`;
 
-  return overpassRequest<NodeOutput>(query);
+  return overpassRequest<NodeOutput | CenterOutput>(query);
 };

@@ -1,3 +1,4 @@
+import { OFFROAD_NODES_BREADTH, OFFROAD_NODES_DISTANCE } from "@/const/offroad";
 import { getElevations } from "@/services/gmaps/elevation";
 import { calculatePathAStarBidirectional } from "@/services/graph/calculate/path/a-star/bidirectional";
 import { calculatePathAStarFromBottom } from "@/services/graph/calculate/path/a-star/from-bottom";
@@ -8,9 +9,9 @@ import { searchTerrainPolygons } from "@/services/search/terrain-polygons";
 import type { Coordinate } from "ol/coordinate";
 
 // Graph matrix
-const distanceGap = 5;
-const altNodes = 20;
-const altRoutes = 5;
+const distanceGap = OFFROAD_NODES_DISTANCE;
+const altNodes = OFFROAD_NODES_BREADTH;
+const altRoutes = 3;
 
 export async function searchShorterOffroad(
   destination: Coordinate,
@@ -21,7 +22,7 @@ export async function searchShorterOffroad(
     const [closerNodes, terrainPolygons] = await Promise.all([
       searchCloserNodes(destination, maxDistance),
       // Recupero i tipi di terreni nella zona
-      searchTerrainPolygons(destination, maxDistance),
+      searchTerrainPolygons(destination, maxDistance + 500),
     ]);
     const nodesByDistance = sortNodesByDistance(
       closerNodes,

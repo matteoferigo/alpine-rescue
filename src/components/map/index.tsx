@@ -15,6 +15,7 @@ import { setFeaturesStyle } from "@/services/map/features/style";
 import { createWayFeatures } from "@/services/map/features/way";
 import {
   helipadPointStyle,
+  heliportPointStyle,
   offroadNodeStyle,
   offroadPointStyle,
   pointStyle,
@@ -28,6 +29,8 @@ import {
 } from "@/services/map/layer/style/route";
 import { thunderforestCycleTileLayer } from "@/services/map/layer/thunderforest/cycle";
 import { createVectorSource } from "@/services/map/source/vector";
+import type { Feature } from "ol";
+import type { Geometry } from "ol/geom";
 import "ol/ol.css";
 import { useEffect } from "react";
 
@@ -62,13 +65,14 @@ const MapComponent = ({
 
   // Definisco data-layer della mappa
   const nodesLayer = useVectorLayer(pointStyle, 10);
-  const routesLayer = useVectorLayer(routeStyle);
+  const routesLayer = useVectorLayer(routeStyle, 5);
+  const graphLayer = useVectorLayer(offroadNodeStyle);
 
   // Impostazione della mappa
   const ref = useMap({
     center,
     zoom,
-    layers: [thunderforestCycleTileLayer, nodesLayer, routesLayer],
+    layers: [thunderforestCycleTileLayer, nodesLayer, routesLayer, graphLayer],
     onClick(e) {
       // Avvio il processo
       if (searching) return;
@@ -77,6 +81,7 @@ const MapComponent = ({
       // Ripristino mappa
       nodesLayer.getSource()?.clear();
       routesLayer.getSource()?.clear();
+      graphLayer.getSource()?.clear();
 
       // Assegno luogo dell'emergenza da raggiungere (in parallelo)
       const emergencyCoords = coordinateTransform(e.coordinate);
@@ -102,18 +107,6 @@ const MapComponent = ({
     if (!searching) {
       // Mostro nodi sulla mappa
       const nodesFeatures = [];
-      if (offroadGraph) {
-        offroadGraph.forEach((offroadLevel) => {
-          offroadLevel.forEach((alternativeNodeCoords) => {
-            nodesFeatures.push(
-              ...setFeaturesStyle(
-                createNodeFeatures(alternativeNodeCoords),
-                offroadNodeStyle
-              )
-            );
-          });
-        });
-      }
       if (destinationCoords) {
         nodesFeatures.push(...createNodeFeatures(destinationCoords));
       }
@@ -140,7 +133,7 @@ const MapComponent = ({
         nodesFeatures.push(
           ...setFeaturesStyle(
             createNodeFeatures(heliportCoords),
-            helipadPointStyle
+            heliportPointStyle
           )
         );
       }
@@ -179,6 +172,17 @@ const MapComponent = ({
         routesFeatures.push(...setFeaturesStyle(flightPath, flightRouteStyle));
       }
       routesLayer.setSource(createVectorSource(routesFeatures));
+
+      // Grafi sulla mappa
+      const graphFeatures: Feature<Geometry>[] = [];
+      if (offroadGraph) {
+        offroadGraph.forEach((offroadLevel) => {
+          offroadLevel.forEach((alternativeNodeCoords) => {
+            graphFeatures.push(...createNodeFeatures(alternativeNodeCoords));
+          });
+        });
+      }
+      graphLayer.setSource(createVectorSource(graphFeatures));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searching]);

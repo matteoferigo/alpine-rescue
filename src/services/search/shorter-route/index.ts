@@ -9,7 +9,7 @@ import { getDistance } from "ol/sphere";
 export async function searchShorterRoute(
   startRoadPoint: Coordinate,
   endFootPoint: Coordinate,
-  maxDistance: number = 2000
+  maxDistance: number = 5000
 ) {
   try {
     // Recuperi gli attacchi dei sentieri nei ditorni
@@ -27,7 +27,7 @@ export async function searchShorterRoute(
       const nodes: Record<string, NodeOutput> = {};
       trailheads.forEach((node) => {
         const trailheadPoint = [node.lon, node.lat];
-        nodes[getDistance(trailheadPoint, startRoadPoint)] = node;
+        nodes[getDistance(trailheadPoint, endFootPoint)] = node;
       });
       closerTrailheads = Object.keys(nodes)
         .sort((a, b) => +a - +b)

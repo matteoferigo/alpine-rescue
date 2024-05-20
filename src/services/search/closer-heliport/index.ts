@@ -1,3 +1,4 @@
+import { parseCenterElement } from "@/services/overpass/parsers/center";
 import { getCloserNode } from "@/services/path/way/closer-node";
 import { searchHeliportNearby } from "@/services/requests/heliport/nearby";
 import type { Coordinate } from "ol/coordinate";
@@ -10,9 +11,7 @@ export async function searchCloserHeliportPoint(hospitalCoords: Coordinate) {
       throw new Error("Non sono state trovate eliporti nelle vicinanze");
 
     // Scelgo il più vicino
-    const heliportsCoords = heliports.map((node) =>
-      "center" in node ? node.center : node
-    );
+    const heliportsCoords = heliports.map(parseCenterElement);
     const heliportNode = getCloserNode(heliportsCoords, hospitalCoords);
     return heliportNode.coordinate;
   } catch (error) {
