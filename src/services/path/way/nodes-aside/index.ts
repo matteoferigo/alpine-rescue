@@ -18,9 +18,9 @@ export const getNodesAside = (
   const rightBearing = bearing - rightAngleRadiants;
 
   // Generare i punti
-  const points = [];
+  const points = [fromPoint];
   for (let i = 1; i < Math.ceil(numPoints / 2); i++) {
-    points.push(computeDestinationPoint(fromPoint, i * gap, leftBearing));
+    points.unshift(computeDestinationPoint(fromPoint, i * gap, leftBearing));
     points.push(computeDestinationPoint(fromPoint, i * gap, rightBearing));
   }
 

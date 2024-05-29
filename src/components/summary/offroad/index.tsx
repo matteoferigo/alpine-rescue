@@ -6,6 +6,9 @@ import { useState } from "react";
 
 const SummaryOffroadRoute = () => {
   const {
+    destinationCoords,
+    trailEndCoords,
+
     offroadNodes,
     offroadArchs,
     offroadDistance,
@@ -52,7 +55,7 @@ const SummaryOffroadRoute = () => {
               }`}
               onClick={() => setShowAlternative(false)}
             >
-              {"A* Bidirezionle "}
+              {"A* Bidirezionale "}
               <span
                 className={
                   showAlternative
@@ -71,7 +74,7 @@ const SummaryOffroadRoute = () => {
               }`}
               onClick={() => setShowAlternative(true)}
             >
-              {"A* Bottom "}
+              {"A* Standard "}
               <span
                 className={
                   showAlternative

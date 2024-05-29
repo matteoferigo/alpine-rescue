@@ -13,10 +13,9 @@ export async function createGraphFrom2Points(
   const nodesBetween = getNodesBeetween(fromPoint, toPoint, distanceGap);
 
   // Per ogni nodo intermedio trovo ortogonalmente dei nodi alternativi
-  const nodesGrid = nodesBetween.map((node) => [
-    node,
-    ...getNodesAside(node, toPoint, distanceGap, altNodes),
-  ]);
+  const nodesGrid = nodesBetween.map((node) =>
+    getNodesAside(node, toPoint, distanceGap, altNodes)
+  );
 
   if (!nodesGrid.length) {
     return [[fromPoint], [toPoint]];

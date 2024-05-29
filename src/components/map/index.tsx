@@ -23,6 +23,7 @@ import {
 } from "@/services/map/layer/style/point";
 import {
   flightRouteStyle,
+  offroadAlternativeRouteStyle,
   offroadRouteStyle,
   roadRouteStyle,
   routeStyle,
@@ -41,8 +42,13 @@ const MapComponent = ({
   onSearchStart,
   onSearchEnd,
 }: MapComponentProps) => {
-  const { destinationCoords, trailEndCoords, offroadNodes, offroadGraph } =
-    useOffroadRouteContext();
+  const {
+    destinationCoords,
+    trailEndCoords,
+    offroadNodes,
+    offroadAlternativeNodes,
+    offroadGraph,
+  } = useOffroadRouteContext();
   const {
     trailheadCoords,
     departureCoords,
@@ -154,6 +160,14 @@ const MapComponent = ({
           ...setFeaturesStyle(
             createWayFeatures(offroadNodes),
             offroadRouteStyle
+          )
+        );
+      }
+      if (offroadAlternativeNodes) {
+        routesFeatures.push(
+          ...setFeaturesStyle(
+            createWayFeatures(offroadAlternativeNodes),
+            offroadAlternativeRouteStyle
           )
         );
       }

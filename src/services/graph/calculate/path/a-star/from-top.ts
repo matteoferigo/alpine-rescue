@@ -1,117 +1,80 @@
 import { calculateArchWeight } from "@/services/graph/calculate/weight";
 import type { WeightedPath } from "@/services/graph/types";
 import type { TerrainPolygon } from "@/services/terrain/types";
-import type { Coordinate } from "ol/coordinate";
+import { type Coordinate } from "ol/coordinate";
 
-export function calculatePathAStarBidirectional(
+export function calculatePathAStarFromTop(
   graph: Coordinate[][],
   terrains: TerrainPolygon[]
 ) {
-  // Parto dagli estremi
-  const startNode = graph.at(0)![0];
-  const endNode = graph.at(-1)![0];
-  const startingNodes: WeightedPath = {
+  // Parto dal primo nodo
+  const firstNode = graph.at(0)![0];
+  const lastNode = graph.at(-1)![0];
+  const crossedNodes: WeightedPath = {
     distance: 0,
     duration: 0,
-    nodes: [startNode],
-    archs: [],
-  };
-  const closingNodes: WeightedPath = {
-    distance: 0,
-    duration: 0,
-    nodes: [endNode],
+    nodes: [firstNode],
     archs: [],
   };
 
   // Assegno valori dinamici
-  let startingIndex = Math.floor(graph[1].length / 2);
-  let startingLevel = 1;
-  let closingIndex = startingIndex;
-  let closingLevel = graph.length - 2;
-  // Parto dall'inizio
-  let reverse = false;
-  let currentNode: Coordinate = startNode;
-  let goalNode: Coordinate = endNode;
+  let currentNode: Coordinate = firstNode;
+  const goalNode: Coordinate = lastNode;
+  let prevNode: Coordinate;
+  let currentIndex = Math.floor(graph[1].length / 2);
+  let currentLevel = 1;
 
-  // Concludo all'incontro dei due percorsi
+  // Concludo al raggiungimento del goal
   while (currentNode !== goalNode) {
     // Definisco i valori
-    const currentIndex = reverse ? closingIndex : startingIndex;
-    const currentLevel = reverse ? closingLevel : startingLevel;
-    const crossedNodes = reverse ? closingNodes : startingNodes;
-    const prevNode = reverse
-      ? closingNodes.nodes.at(1)
-      : startingNodes.nodes.at(-2);
+    const nextLevel = currentLevel + 1;
+    const isLast = graph[nextLevel].includes(goalNode);
 
     // Recupero nodi raggiungibili
-    const closerNodes = getCloserNodes(
-      graph,
-      currentLevel,
-      currentIndex,
-      reverse
-    );
-    const nextNodes = closerNodes.reduce((acc: Coordinate[], nodes) => {
-      acc.push(
-        ...(nodes.filter((node) => node && node !== prevNode) as Coordinate[])
-      );
-      return acc;
-    }, []);
+    const closerNodes = getCloserNodes(graph, currentLevel, currentIndex);
+    const nextNodes = isLast
+      ? [goalNode]
+      : closerNodes.reduce((acc: Coordinate[], nodes) => {
+          acc.push(
+            ...(nodes.filter(
+              (node) => node && node !== prevNode
+            ) as Coordinate[])
+          );
+          return acc;
+        }, []);
 
     // Recupero miglior nodo
-    const nextBest = getBestNode(
-      nextNodes,
-      currentNode,
-      goalNode,
-      terrains,
-      reverse
-    );
+    const nextBest = getBestNode(nextNodes, currentNode, goalNode, terrains);
     const [nextNode] = nextBest.nodes;
     const [nextArch] = nextBest.archs;
-    const isLast = nextNode === goalNode;
 
     // Appendo migliori nodi al grafo
     crossedNodes.distance += nextArch.distance;
     crossedNodes.duration += nextArch.duration;
-    if (reverse) {
-      if (!isLast) closingNodes.nodes.unshift(nextNode);
-      closingNodes.archs.unshift(nextArch);
-    } else {
-      if (!isLast) startingNodes.nodes.push(nextNode);
-      startingNodes.archs.push(nextArch);
-    }
+    crossedNodes.nodes.push(nextNode);
+    crossedNodes.archs.push(nextArch);
 
     // Aggiorno i valori dinamici
+    prevNode = currentNode;
+    currentNode = nextNode;
     closerNodes.forEach((nodeLevel, levelIndex) => {
       const nodeIndex = nodeLevel.findIndex((node) => node === nextNode);
       if (nodeIndex >= 0) {
-        if (reverse) {
-          // Avanzo di livello
-          if (levelIndex === 0) closingLevel -= 1;
-          // Muovo orizzontalmente
-          closingIndex += nodeIndex - 1;
-        } else {
-          // Avanzo di livello
-          if (levelIndex === 2) startingLevel += 1;
-          // Muovo orizzontalmente
-          startingIndex += nodeIndex - 1;
-        }
+        // Avanzo di livello
+        if (levelIndex === 0) currentLevel -= 1;
+        else if (levelIndex === 2) currentLevel += 1;
+        // Muovo orizzontalmente
+        currentIndex += nodeIndex - 1;
       }
     });
-    // Cambio direzione
-    reverse = !reverse;
-    // Aggiorno i puntatori
-    currentNode = reverse
-      ? closingNodes.nodes.at(0)!
-      : startingNodes.nodes.at(-1)!;
-    goalNode = nextNode;
   }
 
-  // Combino i due grafi
+  // Restituisco il grafo
   return {
-    distance: startingNodes.distance + closingNodes.distance,
-    duration: startingNodes.duration + closingNodes.duration,
-    nodes: [...startingNodes.nodes, ...closingNodes.nodes],
-    archs: [...startingNodes.archs, ...closingNodes.archs],
+    distance: crossedNodes.distance,
+    duration: crossedNodes.duration,
+    nodes: crossedNodes.nodes,
+    archs: crossedNodes.archs,
   };
 }
 
@@ -119,16 +82,11 @@ function getBestNode(
   nodes: Coordinate[],
   fromNode: Coordinate,
   toNode: Coordinate,
-  terrains: TerrainPolygon[],
-  reverse?: boolean
+  terrains: TerrainPolygon[]
 ) {
   return nodes.reduce((acc: WeightedPath | null, node) => {
     // Calcolo la percorrenza fino al nodo
-    const fromArch = calculateArchWeight(
-      reverse ? node : fromNode,
-      reverse ? fromNode : node,
-      terrains
-    );
+    const fromArch = calculateArchWeight(fromNode, node, terrains);
     // Stimo la percorrenza fino all'ultimo nodo (ignorando il terreno)
     const toArch =
       node === toNode
@@ -143,11 +101,7 @@ function getBestNode(
             speed: 0,
             terrain: [],
           }
-        : calculateArchWeight(
-            reverse ? toNode : node,
-            reverse ? node : toNode,
-            terrains
-          );
+        : calculateArchWeight(node, toNode, terrains);
 
     // Scelgo il nodo con minor tempo di percorrenza
     const duration = fromArch.duration + toArch.duration;

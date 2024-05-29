@@ -40,8 +40,8 @@ const RouteArchsTable = ({
               className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
             >
               <th className="px-3 py-4 space-x-1 font-semibold">
-                <dt title={`${arch.fromNode[1]},${arch.fromNode[0]}`}>
-                  {`${arch.fromNode[2].toFixed(0)} mslm`}
+                <dt title={`${arch.toNode[1]},${arch.toNode[0]}`}>
+                  {`${arch.toNode[2].toFixed(0)} mslm`}
                 </dt>
                 <dd className="hidden">{`${arch.fromNode[1]},${arch.fromNode[0]}`}</dd>
               </th>
@@ -61,20 +61,24 @@ const RouteArchsTable = ({
               )} m`}</td>
               <td className="px-3 py-4 space-x-1">
                 <span className="text-xs">
-                  {arch.slope > 50
-                    ? "🧗"
-                    : arch.terrain.includes("wood")
-                    ? "🌳"
-                    : arch.terrain.includes("rock")
-                    ? "🪨"
-                    : arch.terrain.includes("scree")
-                    ? "🌿"
-                    : "🥾"}
+                  <dt className="inline" title={arch.terrain.join("/")}>
+                    {arch.slope > 50
+                      ? "🧗"
+                      : arch.terrain.includes("wood")
+                      ? "🌳"
+                      : arch.terrain.includes("rock")
+                      ? "🪨"
+                      : arch.terrain.includes("scree")
+                      ? "🌿"
+                      : "🥾"}
+                  </dt>
+                  <dd className="hidden">{arch.terrain.join("/")}</dd>
                 </span>
                 <span>{` ${arch.speed.toFixed(1)} m/s`}</span>
               </td>
               <td className="px-3 py-4 space-x-1 text-right">
-                {formatTime(arch.duration)}
+                <dt title={`${arch.duration}`}>{formatTime(arch.duration)}</dt>
+                <dd className="hidden">{`${arch.duration}s`}</dd>
               </td>
             </tr>
           ))}
@@ -102,7 +106,8 @@ const RouteArchsTable = ({
             )} m`}</td>
             <td className="px-3 py-4 space-x-1" />
             <td className="px-3 py-4 space-x-1 text-right">
-              {formatTime(duration)}
+              <dt title={`${duration}`}>{formatTime(duration)}</dt>
+              <dd className="hidden">{`${duration}s`}</dd>
             </td>
           </tr>
         </tfoot>

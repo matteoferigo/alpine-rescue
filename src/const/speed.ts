@@ -28,5 +28,5 @@ export const DOWNHILL_SPEED = [
   { fromSlope: 90, toSlope: 100, kmh: 0.2, ms: 0.05, level: 8 },
 ];
 
-export const AVG_SPEED_MS = UPHILL_SPEED[0].ms;
+export const AVG_SPEED_MS = UPHILL_SPEED[3].ms; // 2km/h https://www.cai.it/wp-content/uploads/2024/04/Escursionismo-Marrosuetal.2023_signed.pdf
 export const DOWNHILL_FACTOR = 0.83;

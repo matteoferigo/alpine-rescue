@@ -39,15 +39,19 @@ export function calculateArchWeight(
       terrainTypes.length;
 
   // Calcolo la distanza dell'arco (in metri)
-  const elevation = calculateElevationGain(fromNode[2], toNode[2]);
+  const elevation = +calculateElevationGain(fromNode[2], toNode[2]).toFixed(2);
   const descending = fromNode[2] > toNode[2];
-  const distance = calculateWayLength(fromNode, toNode, elevation);
-  const slope = calculateSlope(distance, elevation);
-  const speed = getSpeedAvg(slope, descending) * terrainFactor;
+  const distance = +calculateWayLength(fromNode, toNode, elevation).toFixed(2);
+  const slope = +calculateSlope(distance, elevation).toFixed(1);
+  const speed = +(getSpeedAvg(slope, descending) * terrainFactor).toFixed(2);
 
   // Calcolo il peso dell'arco (in secondi)
-  const duration =
-    calculateWayTimeEstimation(distance, elevation, descending) * terrainFactor;
+  const duration = calculateWayTimeEstimation(
+    distance,
+    elevation,
+    descending,
+    terrainFactor
+  );
 
   // Restituisco tutti i parametri
   return {

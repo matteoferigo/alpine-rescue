@@ -16,6 +16,14 @@ export const offroadRouteStyle = new Style({
   }),
 });
 
+export const offroadAlternativeRouteStyle = new Style({
+  stroke: new Stroke({
+    color: "rgb(0, 149, 255)",
+    lineDash: [2, 10],
+    width: 3,
+  }),
+});
+
 export const roadRouteStyle = new Style({
   stroke: new Stroke({
     color: "rgb(15, 84, 255)",

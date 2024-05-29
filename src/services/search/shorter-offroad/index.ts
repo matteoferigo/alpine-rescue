@@ -1,7 +1,7 @@
 import { OFFROAD_NODES_BREADTH, OFFROAD_NODES_DISTANCE } from "@/const/offroad";
 import { getElevations } from "@/services/gmaps/elevation";
 import { calculatePathAStarBidirectional } from "@/services/graph/calculate/path/a-star/bidirectional";
-import { calculatePathAStarFromBottom } from "@/services/graph/calculate/path/a-star/from-bottom";
+import { calculatePathAStarFromTop } from "@/services/graph/calculate/path/a-star/from-top";
 import { createGraphFrom2Points } from "@/services/graph/create/from-points";
 import { sortNodesByDistance } from "@/services/path/nodes/sort-by-distance";
 import { searchCloserNodes } from "@/services/search/closer-nodes";
@@ -11,7 +11,7 @@ import type { Coordinate } from "ol/coordinate";
 // Graph matrix
 const distanceGap = OFFROAD_NODES_DISTANCE;
 const altNodes = OFFROAD_NODES_BREADTH;
-const altRoutes = 3;
+const altRoutes = 1;
 
 export async function searchShorterOffroad(
   destination: Coordinate,
@@ -55,10 +55,8 @@ export async function searchShorterOffroad(
           terrainPolygons
         );
         // (Calcolo alternativa)
-        const bestPathFromBottom = calculatePathAStarFromBottom(
-          graph,
-          terrainPolygons
-        );
+        // const bestPathFromBottom = calculatePathAStarFromBottom(
+        const bestPathAStar = calculatePathAStarFromTop(graph, terrainPolygons);
 
         // Restituisco il percorso migliore
         // (e alternativa)
@@ -68,7 +66,7 @@ export async function searchShorterOffroad(
             graph,
           },
           {
-            ...bestPathFromBottom,
+            ...bestPathAStar,
             graph,
           },
         ];
@@ -80,16 +78,16 @@ export async function searchShorterOffroad(
       .sort((a, b) => a[0].duration - b[0].duration)
       .map((archs) => archs[0]);
     // (Estraggo alternativa)
-    const shorterArchsFromBottom = archWithNodes
+    const shorterArchsAStar = archWithNodes
       .sort((a, b) => a[1].duration - b[1].duration)
       .map((archs) => archs[1]);
     console.debug(
       "Offroad Paths: stima accurata",
       shorterArchsBidirectional,
-      shorterArchsFromBottom
+      shorterArchsAStar
     );
 
-    return [shorterArchsBidirectional, shorterArchsFromBottom];
+    return [shorterArchsBidirectional, shorterArchsAStar];
   } catch (error) {
     console.warn(`${error}`);
     throw new Error("Non è stato possibile calcolare il percorso fuori strada");
