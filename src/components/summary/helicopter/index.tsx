@@ -1,10 +1,17 @@
+import type { SummaryHelicopterRouteProps } from "@/components/summary/helicopter/types";
 import { useHelicopterRouteContext } from "@/contexts/route/helicopter/hooks";
 import { useOffroadRouteContext } from "@/contexts/route/offroad/hooks";
 import { formatTime } from "@/services/path/time/format";
 
-const SummaryHelicopterRoute = () => {
+const SummaryHelicopterRoute = ({
+  showABidirectional,
+}: SummaryHelicopterRouteProps) => {
   const { flightDuration, trailDuration } = useHelicopterRouteContext();
-  const { offroadDuration } = useOffroadRouteContext();
+  const { offroadDurationAStandard, offroadDurationABidirectional } =
+    useOffroadRouteContext();
+  const offroadDuration = showABidirectional
+    ? offroadDurationABidirectional
+    : offroadDurationAStandard;
 
   const hasHelicopterRoute =
     flightDuration != null && trailDuration != null && offroadDuration != null;

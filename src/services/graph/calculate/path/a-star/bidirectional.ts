@@ -39,9 +39,6 @@ export function calculatePathAStarBidirectional(
     const currentIndex = reverse ? closingIndex : startingIndex;
     const currentLevel = reverse ? closingLevel : startingLevel;
     const crossedNodes = reverse ? closingNodes : startingNodes;
-    const prevNode = reverse
-      ? closingNodes.nodes.at(1)
-      : startingNodes.nodes.at(-2);
 
     // Recupero nodi raggiungibili
     const closerNodes = getCloserNodes(
@@ -52,21 +49,27 @@ export function calculatePathAStarBidirectional(
     );
     const nextNodes = closerNodes.reduce((acc: Coordinate[], nodes) => {
       acc.push(
-        ...(nodes.filter((node) => node && node !== prevNode) as Coordinate[])
+        ...(nodes.filter(
+          (node) => node && !crossedNodes.nodes.includes(node)
+        ) as Coordinate[])
       );
       return acc;
     }, []);
 
     // Recupero miglior nodo
-    const nextBest = getBestNode(
+    const bestRoutes = getBestRoutes(
       nextNodes,
       currentNode,
       goalNode,
       terrains,
       reverse
     );
-    const [nextNode] = nextBest.nodes;
-    const [nextArch] = nextBest.archs;
+    // Ricongiungo i percorsi una volta raggiunto il centro
+    if (Math.abs(closingLevel - startingLevel) < 2) {
+      bestRoutes.sort((a, b) => a.distance - b.distance);
+    }
+    const [nextNode] = bestRoutes[0].nodes;
+    const [nextArch] = bestRoutes[0].archs;
     const isLast = nextNode === goalNode;
 
     // Appendo migliori nodi al grafo
@@ -115,14 +118,14 @@ export function calculatePathAStarBidirectional(
   };
 }
 
-function getBestNode(
+function getBestRoutes(
   nodes: Coordinate[],
   fromNode: Coordinate,
   toNode: Coordinate,
   terrains: TerrainPolygon[],
   reverse?: boolean
 ) {
-  return nodes.reduce((acc: WeightedPath | null, node) => {
+  const closerRoutes = nodes.map((node) => {
     // Calcolo la percorrenza fino al nodo
     const fromArch = calculateArchWeight(
       reverse ? node : fromNode,
@@ -149,20 +152,16 @@ function getBestNode(
             terrains
           );
 
-    // Scelgo il nodo con minor tempo di percorrenza
-    const duration = fromArch.duration + toArch.duration;
+    return {
+      distance: fromArch.distance + toArch.distance,
+      duration: fromArch.duration + toArch.duration,
+      nodes: [node],
+      archs: [fromArch, toArch],
+    };
+  });
 
-    if (!acc || acc.duration > duration) {
-      return {
-        distance: fromArch.distance + toArch.distance,
-        duration: fromArch.duration + toArch.duration,
-        nodes: [node],
-        archs: [fromArch, toArch],
-      };
-    } else {
-      return acc;
-    }
-  }, null)!;
+  // Scelgo il nodo con minor tempo di percorrenza
+  return closerRoutes.sort((a, b) => a.duration - b.duration);
 }
 
 function getCloserNodes(
@@ -186,7 +185,7 @@ function getCloserNodes(
 
   // Nodi del livello precedente
   closerNodes.unshift(
-    reverse && prevLevelNodes
+    prevLevelNodes
       ? [
           prevLevelNodes[currentIndex - 1],
           prevLevelNodes[currentIndex],
@@ -196,7 +195,7 @@ function getCloserNodes(
   );
   // Nodi del livello successivo
   closerNodes.push(
-    !reverse && nextLevelNodes
+    nextLevelNodes
       ? [
           nextLevelNodes[currentIndex - 1],
           nextLevelNodes[currentIndex],

@@ -1,7 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 
-export type SummaryComponentProps = {
-  open: boolean;
+export type SummaryOffroadRouteProps = {
   showABidirectional: boolean;
   setShowABidirectional: Dispatch<SetStateAction<boolean>>;
 };

@@ -7,32 +7,37 @@ export type OffroadRouteContextValue = {
   setDestinationCoords: Dispatch<SetStateAction<Coordinate | undefined>>;
   trailEndCoords: Coordinate | undefined;
   setTrailEndCoords: Dispatch<SetStateAction<Coordinate | undefined>>;
-
-  offroadNodes: Coordinate[] | undefined;
-  setOffroadNodes: Dispatch<SetStateAction<Coordinate[] | undefined>>;
-  offroadArchs: WeightedArch[] | undefined;
-  setOffroadArchs: Dispatch<SetStateAction<WeightedArch[] | undefined>>;
   offroadGraph: Coordinate[][] | undefined;
   setOffroadGraph: Dispatch<SetStateAction<Coordinate[][] | undefined>>;
-
-  offroadDistance: number | undefined;
-  setOffroadDistance: Dispatch<SetStateAction<number | undefined>>;
-  offroadDuration: number | undefined;
-  setOffroadDuration: Dispatch<SetStateAction<number | undefined>>;
   offroadElevationGain: number | undefined;
   setOffroadElevationGain: Dispatch<SetStateAction<number | undefined>>;
 
-  // (alternativa)
-  offroadAlternativeNodes: Coordinate[] | undefined;
-  setOffroadAlternativeNodes: Dispatch<
-    SetStateAction<Coordinate[] | undefined>
-  >;
-  offroadAlternativeArchs: WeightedArch[] | undefined;
-  setOffroadAlternativeArchs: Dispatch<
+  offroadNodesAStandard: Coordinate[] | undefined;
+  setOffroadNodesAStandard: Dispatch<SetStateAction<Coordinate[] | undefined>>;
+  offroadArchsAStandard: WeightedArch[] | undefined;
+  setOffroadArchsAStandard: Dispatch<
     SetStateAction<WeightedArch[] | undefined>
   >;
-  offroadAlternativeDistance: number | undefined;
-  setOffroadAlternativeDistance: Dispatch<SetStateAction<number | undefined>>;
-  offroadAlternativeDuration: number | undefined;
-  setOffroadAlternativeDuration: Dispatch<SetStateAction<number | undefined>>;
+  offroadDistanceAStandard: number | undefined;
+  setOffroadDistanceAStandard: Dispatch<SetStateAction<number | undefined>>;
+  offroadDurationAStandard: number | undefined;
+  setOffroadDurationAStandard: Dispatch<SetStateAction<number | undefined>>;
+
+  // (alternativa)
+  offroadNodesABidirectional: Coordinate[] | undefined;
+  setOffroadNodesABidirectional: Dispatch<
+    SetStateAction<Coordinate[] | undefined>
+  >;
+  offroadArchsABidirectional: WeightedArch[] | undefined;
+  setOffroadArchsABidirectional: Dispatch<
+    SetStateAction<WeightedArch[] | undefined>
+  >;
+  offroadDistanceABidirectional: number | undefined;
+  setOffroadDistanceABidirectional: Dispatch<
+    SetStateAction<number | undefined>
+  >;
+  offroadDurationABidirectional: number | undefined;
+  setOffroadDurationABidirectional: Dispatch<
+    SetStateAction<number | undefined>
+  >;
 };

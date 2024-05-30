@@ -11,11 +11,11 @@ import type { Coordinate } from "ol/coordinate";
 // Graph matrix
 const distanceGap = OFFROAD_NODES_DISTANCE;
 const altNodes = OFFROAD_NODES_BREADTH;
-const altRoutes = 1;
+const altRoutes = 3;
 
 export async function searchShorterOffroad(
   destination: Coordinate,
-  maxDistance: number = 300
+  maxDistance: number = 1000
 ) {
   try {
     // Cerco sentieri vicini (seleziono nodi più vicini)
@@ -50,23 +50,20 @@ export async function searchShorterOffroad(
         );
 
         // Calcolo pesi degli archi (percorrenza in secondi)
+        const bestPathAStar = calculatePathAStarFromTop(graph, terrainPolygons);
         const bestPathBiridectional = calculatePathAStarBidirectional(
           graph,
           terrainPolygons
         );
-        // (Calcolo alternativa)
-        // const bestPathFromBottom = calculatePathAStarFromBottom(
-        const bestPathAStar = calculatePathAStarFromTop(graph, terrainPolygons);
 
-        // Restituisco il percorso migliore
-        // (e alternativa)
+        // Restituisco il percorso migliore (e alternativa)
         return [
           {
-            ...bestPathBiridectional,
+            ...bestPathAStar,
             graph,
           },
           {
-            ...bestPathAStar,
+            ...bestPathBiridectional,
             graph,
           },
         ];
@@ -74,20 +71,21 @@ export async function searchShorterOffroad(
     );
 
     // Estraggo il percorso migliore
-    const shorterArchsBidirectional = archWithNodes
+    const shorterArchsAStandard = archWithNodes
       .sort((a, b) => a[0].duration - b[0].duration)
       .map((archs) => archs[0]);
-    // (Estraggo alternativa)
-    const shorterArchsAStar = archWithNodes
+    const shorterArchsABidirectional = archWithNodes
       .sort((a, b) => a[1].duration - b[1].duration)
       .map((archs) => archs[1]);
     console.debug(
       "Offroad Paths: stima accurata",
-      shorterArchsBidirectional,
-      shorterArchsAStar
+      "(a-star)",
+      shorterArchsAStandard,
+      "(a-bidir)",
+      shorterArchsABidirectional
     );
 
-    return [shorterArchsBidirectional, shorterArchsAStar];
+    return [shorterArchsAStandard, shorterArchsABidirectional];
   } catch (error) {
     console.warn(`${error}`);
     throw new Error("Non è stato possibile calcolare il percorso fuori strada");

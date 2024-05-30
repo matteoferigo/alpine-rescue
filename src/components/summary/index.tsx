@@ -3,7 +3,11 @@ import SummaryHelicopterRoute from "@/components/summary/helicopter";
 import SummaryOffroadRoute from "@/components/summary/offroad";
 import type { SummaryComponentProps } from "@/components/summary/types";
 
-const SummaryComponent = ({ open }: SummaryComponentProps) => {
+const SummaryComponent = ({
+  open,
+  showABidirectional,
+  setShowABidirectional,
+}: SummaryComponentProps) => {
   return (
     <aside
       className={`relative text-gray-900 dark:text-white bg-white dark:bg-gray-900 overflow-x-auto box-border space-y-10 transition-width duration-300 ${
@@ -12,9 +16,12 @@ const SummaryComponent = ({ open }: SummaryComponentProps) => {
           : "w-full h-0 md:w-0 md:h-screen p-0 ease-out"
       }`}
     >
-      <SummaryOffroadRoute />
-      <SummaryDriveRoute />
-      <SummaryHelicopterRoute />
+      <SummaryOffroadRoute
+        showABidirectional={showABidirectional}
+        setShowABidirectional={setShowABidirectional}
+      />
+      <SummaryDriveRoute showABidirectional={showABidirectional} />
+      <SummaryHelicopterRoute showABidirectional={showABidirectional} />
     </aside>
   );
 };

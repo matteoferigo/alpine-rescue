@@ -6,23 +6,26 @@ import { createElement, useState, type PropsWithChildren } from "react";
 const OffroadRouteProvider = ({ children }: PropsWithChildren) => {
   const [destinationCoords, setDestinationCoords] = useState<Coordinate>();
   const [trailEndCoords, setTrailEndCoords] = useState<Coordinate>();
-
-  const [offroadNodes, setOffroadNodes] = useState<Coordinate[]>();
-  const [offroadArchs, setOffroadArchs] = useState<WeightedArch[]>();
   const [offroadGraph, setOffroadGraph] = useState<Coordinate[][]>();
-
-  const [offroadDistance, setOffroadDistance] = useState<number>();
-  const [offroadDuration, setOffroadDuration] = useState<number>();
   const [offroadElevationGain, setOffroadElevationGain] = useState<number>();
 
-  // (alternativa)
-  const [offroadAlternativeNodes, setOffroadAlternativeNodes] =
+  const [offroadNodesAStandard, setOffroadNodesAStandard] =
     useState<Coordinate[]>();
-  const [offroadAlternativeArchs, setOffroadAlternativeArchs] =
+  const [offroadArchsAStandard, setOffroadArchsAStandard] =
     useState<WeightedArch[]>();
-  const [offroadAlternativeDistance, setOffroadAlternativeDistance] =
+  const [offroadDistanceAStandard, setOffroadDistanceAStandard] =
     useState<number>();
-  const [offroadAlternativeDuration, setOffroadAlternativeDuration] =
+  const [offroadDurationAStandard, setOffroadDurationAStandard] =
+    useState<number>();
+
+  // (alternativa)
+  const [offroadNodesABidirectional, setOffroadNodesABidirectional] =
+    useState<Coordinate[]>();
+  const [offroadArchsABidirectional, setOffroadArchsABidirectional] =
+    useState<WeightedArch[]>();
+  const [offroadDistanceABidirectional, setOffroadDistanceABidirectional] =
+    useState<number>();
+  const [offroadDurationABidirectional, setOffroadDurationABidirectional] =
     useState<number>();
 
   const value = {
@@ -30,29 +33,28 @@ const OffroadRouteProvider = ({ children }: PropsWithChildren) => {
     setDestinationCoords,
     trailEndCoords,
     setTrailEndCoords,
-
-    offroadNodes,
-    setOffroadNodes,
-    offroadArchs,
-    setOffroadArchs,
     offroadGraph,
     setOffroadGraph,
-
-    offroadDistance,
-    setOffroadDistance,
-    offroadDuration,
-    setOffroadDuration,
     offroadElevationGain,
     setOffroadElevationGain,
 
-    offroadAlternativeNodes,
-    setOffroadAlternativeNodes,
-    offroadAlternativeArchs,
-    setOffroadAlternativeArchs,
-    offroadAlternativeDistance,
-    setOffroadAlternativeDistance,
-    offroadAlternativeDuration,
-    setOffroadAlternativeDuration,
+    offroadNodesAStandard,
+    setOffroadNodesAStandard,
+    offroadArchsAStandard,
+    setOffroadArchsAStandard,
+    offroadDistanceAStandard,
+    setOffroadDistanceAStandard,
+    offroadDurationAStandard,
+    setOffroadDurationAStandard,
+
+    offroadNodesABidirectional,
+    setOffroadNodesABidirectional,
+    offroadArchsABidirectional,
+    setOffroadArchsABidirectional,
+    offroadDistanceABidirectional,
+    setOffroadDistanceABidirectional,
+    offroadDurationABidirectional,
+    setOffroadDurationABidirectional,
   };
 
   return createElement(OffroadRouteContext.Provider, { value }, children);

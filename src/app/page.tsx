@@ -28,6 +28,7 @@ export default function Home() {
     setShowResults(true);
     setSearching(false);
   };
+  const [showABidirectional, setShowABidirectional] = useState(false);
 
   return (
     <main>
@@ -47,8 +48,13 @@ export default function Home() {
                   searching={searching}
                   onSearchStart={onSearchStart}
                   onSearchEnd={onSearchEnd}
+                  showABidirectional={showABidirectional}
                 />
-                <SummaryComponent open={showResults} />
+                <SummaryComponent
+                  open={showResults}
+                  showABidirectional={showABidirectional}
+                  setShowABidirectional={setShowABidirectional}
+                />
                 <div className="absolute top-2 right-2 md:top-4 md:right-6">
                   <HamburgerButton
                     open={showResults}

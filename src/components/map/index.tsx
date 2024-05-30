@@ -23,7 +23,6 @@ import {
 } from "@/services/map/layer/style/point";
 import {
   flightRouteStyle,
-  offroadAlternativeRouteStyle,
   offroadRouteStyle,
   roadRouteStyle,
   routeStyle,
@@ -39,15 +38,16 @@ const MapComponent = ({
   center,
   zoom,
   searching,
+  showABidirectional,
   onSearchStart,
   onSearchEnd,
 }: MapComponentProps) => {
   const {
     destinationCoords,
     trailEndCoords,
-    offroadNodes,
-    offroadAlternativeNodes,
     offroadGraph,
+    offroadNodesAStandard,
+    offroadNodesABidirectional,
   } = useOffroadRouteContext();
   const {
     trailheadCoords,
@@ -155,19 +155,20 @@ const MapComponent = ({
 
       // Percorsi sulla mappa
       const routesFeatures = [];
-      if (offroadNodes) {
+      // Switch offroad nodes showABidirectional
+      if (offroadNodesAStandard && !showABidirectional) {
         routesFeatures.push(
           ...setFeaturesStyle(
-            createWayFeatures(offroadNodes),
+            createWayFeatures(offroadNodesAStandard),
             offroadRouteStyle
           )
         );
       }
-      if (offroadAlternativeNodes) {
+      if (offroadNodesABidirectional && showABidirectional) {
         routesFeatures.push(
           ...setFeaturesStyle(
-            createWayFeatures(offroadAlternativeNodes),
-            offroadAlternativeRouteStyle
+            createWayFeatures(offroadNodesABidirectional),
+            offroadRouteStyle
           )
         );
       }
@@ -199,7 +200,7 @@ const MapComponent = ({
       graphLayer.setSource(createVectorSource(graphFeatures));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searching]);
+  }, [searching, showABidirectional]);
 
   return <div ref={ref} className="w-full flex-1 md:h-screen" />;
 };

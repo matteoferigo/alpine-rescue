@@ -9,47 +9,49 @@ export const useFindOffroadRoute = () => {
   const {
     setDestinationCoords,
     setTrailEndCoords,
-    setOffroadNodes,
-    setOffroadArchs,
     setOffroadGraph,
-    setOffroadDistance,
-    setOffroadDuration,
     setOffroadElevationGain,
 
-    setOffroadAlternativeNodes,
-    setOffroadAlternativeArchs,
-    setOffroadAlternativeDistance,
-    setOffroadAlternativeDuration,
+    setOffroadNodesAStandard,
+    setOffroadArchsAStandard,
+    setOffroadDistanceAStandard,
+    setOffroadDurationAStandard,
+
+    setOffroadNodesABidirectional,
+    setOffroadArchsABidirectional,
+    setOffroadDistanceABidirectional,
+    setOffroadDurationABidirectional,
   } = useOffroadRouteContext();
 
   return async function (destinationCoords: Coordinate) {
     try {
       // Cerco sentiero più vicino
-      const [offroadNodes, alternativeOffroadNodes] =
+      const [offroadNodesAStandard, offroadNodesABidirectional] =
         await searchShorterOffroad(destinationCoords, 500);
-      const closerTrail = offroadNodes[0];
-      const trailEndCoords = closerTrail.nodes[0];
+      const shorterOffroadAStandard = offroadNodesAStandard[0];
+      const trailEndCoords = shorterOffroadAStandard.nodes[0];
 
       // Assengo estremi del sentiero
       setDestinationCoords(destinationCoords);
       setTrailEndCoords(trailEndCoords);
-      // Definisco percorso fuori sentiero
-      setOffroadNodes([...closerTrail.nodes, destinationCoords]);
-      setOffroadDistance(closerTrail.distance);
-      setOffroadDuration(closerTrail.duration);
       setOffroadElevationGain(
         calculateElevationGain(trailEndCoords[2], destinationCoords[2])
       );
-
-      // Salvo dati relativi al calcolo
-      setOffroadArchs(closerTrail.archs);
-      setOffroadGraph(closerTrail.graph);
-
+      setOffroadGraph(shorterOffroadAStandard.graph);
+      // Definisco percorso fuori sentiero
+      setOffroadNodesAStandard([
+        ...shorterOffroadAStandard.nodes,
+        destinationCoords,
+      ]);
+      setOffroadDistanceAStandard(shorterOffroadAStandard.distance);
+      setOffroadDurationAStandard(shorterOffroadAStandard.duration);
+      setOffroadArchsAStandard(shorterOffroadAStandard.archs);
       // (Salvo dati alternativi)
-      setOffroadAlternativeNodes(alternativeOffroadNodes[0].nodes);
-      setOffroadAlternativeArchs(alternativeOffroadNodes[0].archs);
-      setOffroadAlternativeDistance(alternativeOffroadNodes[0].distance);
-      setOffroadAlternativeDuration(alternativeOffroadNodes[0].duration);
+      const shorterOffroadABidirectional = offroadNodesABidirectional[0];
+      setOffroadNodesABidirectional(shorterOffroadABidirectional.nodes);
+      setOffroadArchsABidirectional(shorterOffroadABidirectional.archs);
+      setOffroadDistanceABidirectional(shorterOffroadABidirectional.distance);
+      setOffroadDurationABidirectional(shorterOffroadABidirectional.duration);
 
       // Restituisco coordinate ultimo punto sul sentiero
       return trailEndCoords;

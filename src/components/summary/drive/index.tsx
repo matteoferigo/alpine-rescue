@@ -1,10 +1,15 @@
+import type { SummaryDriveRouteProps } from "@/components/summary/drive/types";
 import { useDriveRouteContext } from "@/contexts/route/drive/hooks";
 import { useOffroadRouteContext } from "@/contexts/route/offroad/hooks";
 import { formatTime } from "@/services/path/time/format";
 
-const SummaryDriveRoute = () => {
+const SummaryDriveRoute = ({ showABidirectional }: SummaryDriveRouteProps) => {
   const { roadDuration, trailDuration } = useDriveRouteContext();
-  const { offroadDuration } = useOffroadRouteContext();
+  const { offroadDurationAStandard, offroadDurationABidirectional } =
+    useOffroadRouteContext();
+  const offroadDuration = showABidirectional
+    ? offroadDurationABidirectional
+    : offroadDurationAStandard;
 
   const hasDriveRoute =
     roadDuration != null && trailDuration != null && offroadDuration != null;
