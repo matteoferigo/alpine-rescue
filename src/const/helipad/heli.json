@@ -1,0 +1,877 @@
+[
+  {
+    "id": 3294,
+    "lat": 46.056333,
+    "lng": 11.132167,
+    "title": "TRENTO OSP. S. CHIARA",
+    "address": "Via Crosina Sartori 6 – 38100 Trento (TN)"
+  },
+  {
+    "id": 3040,
+    "lat": 46.363333,
+    "lng": 11.354667,
+    "title": "ALPE DI SIUSI",
+    "address": "LOCALITA’ COMPACCIO"
+  },
+  {
+    "id": 3096,
+    "lat": 46.5405,
+    "lng": 11.620333,
+    "title": "ANTERSELVA CAMPO SPORTIVO",
+    "address": "STRADA PROVINCIALE 44"
+  },
+  {
+    "id": 3094,
+    "lat": 46.8625,
+    "lng": 12.107,
+    "title": "ANTERSELVA DI MEZZO",
+    "address": "STRADA PROVINCIALE 44"
+  },
+  {
+    "id": 3186,
+    "lat": 46.6525,
+    "lng": 11.214667,
+    "title": "AVELENGO",
+    "address": "VIA FAIZBEN"
+  },
+  {
+    "id": 3120,
+    "lat": 46.608833,
+    "lng": 11.896667,
+    "title": "BADIA",
+    "address": "STRADA SAN LINERT"
+  },
+  {
+    "id": 3038,
+    "lat": 46.8045,
+    "lng": 10.490167,
+    "title": "BELPIANO",
+    "address": "LOCALITA’ BELPIANO (BZ)"
+  },
+  {
+    "id": 3198,
+    "lat": 46.497667,
+    "lng": 11.305167,
+    "title": "BOLZANO BASE HEMS",
+    "address": "Via Lorenz Boheler 1 – 39100 Bolzano (BZ)"
+  },
+  {
+    "id": 3224,
+    "lat": 46.498833,
+    "lng": 11.307833,
+    "title": "BOLZANO PRONTO SOCCORSO",
+    "address": "Via Rosmini 42 – 39100 Bolzano (BZ)"
+  },
+  {
+    "id": 3232,
+    "lat": 46.9975,
+    "lng": 11.501167,
+    "title": "BRENNERO CAMPO SPORTIVO",
+    "address": "VIA STAZIONE"
+  },
+  {
+    "id": 3176,
+    "lat": 46.804,
+    "lng": 11.9325,
+    "title": "BRESSANONE",
+    "address": "Via Dante 53/1 – 39042 Brixen (BZ)"
+  },
+  {
+    "id": 3180,
+    "lat": 46.804,
+    "lng": 11.9325,
+    "title": "BRUNICO",
+    "address": "VIA DEI CAMPI DELLA RIENZA"
+  },
+  {
+    "id": 3164,
+    "lat": 46.804,
+    "lng": 11.9325,
+    "title": "BRUNICO OCCASIONALE",
+    "address": "Via Campi della Rienza – 39031 Brunico (BZ)"
+  },
+  {
+    "id": 3130,
+    "lat": 46.717,
+    "lng": 10.530333,
+    "title": "Burgeis",
+    "address": "STRADA STATALE 40"
+  },
+  {
+    "id": 3184,
+    "lat": 46.9105,
+    "lng": 11.961667,
+    "title": "CAMPO TURES",
+    "address": "VIA DOTTOR DAIMER"
+  },
+  {
+    "id": 3196,
+    "lat": 46.623,
+    "lng": 10.923667,
+    "title": "CASTELBELLO CIARDES",
+    "address": "VIA LINTER"
+  },
+  {
+    "id": 3118,
+    "lat": 46.556667,
+    "lng": 11.730167,
+    "title": "Ciampinoi",
+    "address": "STRADA RUSCIA – CIAMPINOI (BZ)"
+  },
+  {
+    "id": 3214,
+    "lat": 46.539333,
+    "lng": 11.456667,
+    "title": "COLLALBO",
+    "address": "VIA PETER MAYR – COLLALBO (BZ)"
+  },
+  {
+    "id": 3190,
+    "lat": 46.938167,
+    "lng": 11.439333,
+    "title": "COLLE ISARCO",
+    "address": "VIA FLERES – COLLE ISARCO (BZ)"
+  },
+  {
+    "id": 3086,
+    "lat": 46.484667,
+    "lng": 11.456167,
+    "title": "COLLEPIETRA",
+    "address": "STRADA PROVINCIALE 132"
+  },
+  {
+    "id": 3222,
+    "lat": 46.302833,
+    "lng": 11.220833,
+    "title": "CORTACCIA",
+    "address": "VIA RIO LARGO - CORTACCIA (BZ)"
+  },
+  {
+    "id": 3212,
+    "lat": 46.2645,
+    "lng": 11.223833,
+    "title": "CORTINA ALL’ADIGE",
+    "address": "VIA PALUDI – CORTINA ALL’ADIGE (BZ)"
+  },
+  {
+    "id": 3144,
+    "lat": 46.550833,
+    "lng": 11.871667,
+    "title": "Corvara in Abtei",
+    "address": "STRADA STATALE N. 243 – CORVARA (BZ)"
+  },
+  {
+    "id": 3174,
+    "lat": 46.807,
+    "lng": 10.541333,
+    "title": "CURON",
+    "address": "VIA CURON – CURON (BZ)"
+  },
+  {
+    "id": 3158,
+    "lat": 46.734333,
+    "lng": 10.85,
+    "title": "DIGA DI VERNAGO",
+    "address": "VERNAGO"
+  },
+  {
+    "id": 3194,
+    "lat": 46.732667,
+    "lng": 12.220833,
+    "title": "DOBBIACO",
+    "address": "VIA LANGE WAND"
+  },
+  {
+    "id": 3216,
+    "lat": 46.322,
+    "lng": 11.271167,
+    "title": "EGNA",
+    "address": "VIA PLATZ – EGNA (BZ)"
+  },
+  {
+    "id": 3188,
+    "lat": 46.665667,
+    "lng": 11.239833,
+    "title": "FALZEBEN HOTEL",
+    "address": "VIA FALZEBEN – 39010 AVELENGO (BZ)"
+  },
+  {
+    "id": 3048,
+    "lat": 46.808,
+    "lng": 11.881333,
+    "title": "FALZES",
+    "address": "MICHAEL PACHER-STRABE"
+  },
+  {
+    "id": 3182,
+    "lat": 46.517833,
+    "lng": 11.498667,
+    "title": "FIE’ ALLO SCILIAR",
+    "address": "VIA DEL BERSAGLIO – FIE’ ALLO SCILAR (BZ)"
+  },
+  {
+    "id": 3220,
+    "lat": 46.592,
+    "lng": 11.142,
+    "title": "FOIANA",
+    "address": "VIA PROPST WIESER"
+  },
+  {
+    "id": 3146,
+    "lat": 46.3225,
+    "lng": 11.384167,
+    "title": "Kaltenbrunn",
+    "address": "STRADA STATALE N.48"
+  },
+  {
+    "id": 3202,
+    "lat": 46.612167,
+    "lng": 10.857167,
+    "title": "LACES",
+    "address": "VIA MOOS – LACES (BZ)"
+  },
+  {
+    "id": 3168,
+    "lat": 46.278167,
+    "lng": 11.2405,
+    "title": "LAGHETTI",
+    "address": "VIA CAVA LAGHETTI 46"
+  },
+  {
+    "id": 3240,
+    "lat": 46.622,
+    "lng": 10.6935,
+    "title": "LASA C.S.",
+    "address": "VIA VINATO – LASA (BZ)"
+  },
+  {
+    "id": 3001,
+    "lat": 46.674333,
+    "lng": 11.551833,
+    "title": "Latzfons",
+    "address": "-"
+  },
+  {
+    "id": 3003,
+    "lat": 46.686167,
+    "lng": 10.54,
+    "title": "MALLES",
+    "address": "-"
+  },
+  {
+    "id": 3050,
+    "lat": 46.820167,
+    "lng": 11.666,
+    "title": "MARANZA GITSCHBERG",
+    "address": "MITTERECKER STRABE – MARANZA (BZ)"
+  },
+  {
+    "id": 3200,
+    "lat": 46.566667,
+    "lng": 10.7845,
+    "title": "MARTELLO",
+    "address": "VIA MONTESOLE – MARTELLO (BZ)"
+  },
+  {
+    "id": 3082,
+    "lat": 46.753667,
+    "lng": 10.783,
+    "title": "MASO CORTO",
+    "address": "STRADA PROVINCIALE"
+  },
+  {
+    "id": 3112,
+    "lat": 46.585,
+    "lng": 11.245833,
+    "title": "MELTINA",
+    "address": "STRADA PROVINCIALE N.98 – MELTINA (BZ)"
+  },
+  {
+    "id": 3226,
+    "lat": 46.6785,
+    "lng": 11.149667,
+    "title": "MERANO – AL SUOLO",
+    "address": "Via Rossini 5 – 39012 Merano (BZ)"
+  },
+  {
+    "id": 3228,
+    "lat": 46.676833,
+    "lng": 11.153333,
+    "title": "MERANO – IN ELEVAZIONE",
+    "address": "Via Rossini 5 – 39012 Merano (BZ)"
+  },
+  {
+    "id": 3088,
+    "lat": 46.828333,
+    "lng": 11.17,
+    "title": "MOSO DI PASSIRIA",
+    "address": "STRADA PROVINCIALE 14"
+  },
+  {
+    "id": 3080,
+    "lat": 46.5765,
+    "lng": 11.896,
+    "title": "FUNTANACIA",
+    "address": "STRADA PLANMURIN"
+  },
+  {
+    "id": 3110,
+    "lat": 46.577,
+    "lng": 11.2,
+    "title": "GARGAZZONE",
+    "address": "STRADA PROVINCIALE N.159"
+  },
+  {
+    "id": 3031,
+    "lat": 47.261,
+    "lng": 11.384667,
+    "title": "Innsbruck",
+    "address": "Innerkoflerstrasse – 6020 Innsbruck (AUSTRIA)"
+  },
+  {
+    "id": 3034,
+    "lat": 46.610667,
+    "lng": 11.5665,
+    "title": "LAION",
+    "address": "KESSEIWAG – LAION (BZ)"
+  },
+  {
+    "id": 3170,
+    "lat": 46.608167,
+    "lng": 11.176833,
+    "title": "LANA",
+    "address": "VIA CAVA LAGHETTI 46 – LANA (BZ)"
+  },
+  {
+    "id": 3036,
+    "lat": 46.916667,
+    "lng": 11.805833,
+    "title": "LAPPAGO",
+    "address": "LAPPAGO DI SOPRA – LAPPAGO (BZ)"
+  },
+  {
+    "id": 3104,
+    "lat": 46.4535,
+    "lng": 11.0675,
+    "title": "LAUREGNO",
+    "address": "STRADA PROVINCIALE 86 – LAUREGNO (BZ)"
+  },
+  {
+    "id": 3100,
+    "lat": 46.540333,
+    "lng": 11.466833,
+    "title": "LONGOMOSO",
+    "address": "STRADA PROVINCIALE 73"
+  },
+  {
+    "id": 3152,
+    "lat": 46.955167,
+    "lng": 11.921333,
+    "title": "Luttach",
+    "address": "STRADA STATALE N° 621 – LUTAGO (BZ)"
+  },
+  {
+    "id": 3068,
+    "lat": 46.496167,
+    "lng": 10.613,
+    "title": "MADRICIO RIFUGIO",
+    "address": "RIFUGIO MADRICIO (BZ)"
+  },
+  {
+    "id": 3074,
+    "lat": 46.490833,
+    "lng": 10.598833,
+    "title": "Madritsch Bergstation",
+    "address": "STAZIONE A MONTE MADRICIO (BZ)"
+  },
+  {
+    "id": 3090,
+    "lat": 46.277,
+    "lng": 11.212167,
+    "title": "MAGRE’",
+    "address": "STRADA PROVINCIALE 19"
+  },
+  {
+    "id": 3046,
+    "lat": 46.695,
+    "lng": 10.619333,
+    "title": "MAZIA",
+    "address": "MAZIA (BZ)"
+  },
+  {
+    "id": 3021,
+    "lat": 46.838333,
+    "lng": 10.6405,
+    "title": "MELAGO",
+    "address": "FRAZIONE CAPRONE"
+  },
+  {
+    "id": 3236,
+    "lat": 46.753,
+    "lng": 12.109333,
+    "title": "MONGUELFO",
+    "address": "VIA STAZIONE – MONGUELFO (BZ)"
+  },
+  {
+    "id": 3017,
+    "lat": 48.1105,
+    "lng": 11.4655,
+    "title": "MÜNCHEN GROSSHADERN (GER)",
+    "address": "Feodor Lynen Strasse - 81377 München"
+  },
+  {
+    "id": 3062,
+    "lat": 47.672,
+    "lng": 11.215333,
+    "title": "MURNAU AM STAFFELSEE (GER)",
+    "address": "Prof. – Küntscher-Strße"
+  },
+  {
+    "id": 3054,
+    "lat": 46.642,
+    "lng": 11.008667,
+    "title": "NATURNO",
+    "address": "NATURNO (BZ)"
+  },
+  {
+    "id": 3246,
+    "lat": 46.428333,
+    "lng": 11.538,
+    "title": "NOVA LEVANTE",
+    "address": "VICOLO DELLA PALUDE – NOVA LEVANTE (BZ)"
+  },
+  {
+    "id": 3244,
+    "lat": 46.412833,
+    "lng": 11.433333,
+    "title": "NOVA PONENTE",
+    "address": "VICOLO DELLA PALUDE"
+  },
+  {
+    "id": 3204,
+    "lat": 46.340833,
+    "lng": 11.287833,
+    "title": "ORA",
+    "address": "VIA NAZIONALE – ORA (BZ)"
+  },
+  {
+    "id": 3056,
+    "lat": 46.624,
+    "lng": 10.654167,
+    "title": "ORIS",
+    "address": "ORIS ZELTFEST - EYRS (BZ)"
+  },
+  {
+    "id": 3126,
+    "lat": 46.574,
+    "lng": 11.668,
+    "title": "ORTISEI",
+    "address": "STRADA STATALE 242 – ORTISEI (BZ)"
+  },
+  {
+    "id": 3128,
+    "lat": 46.564667,
+    "lng": 11.691833,
+    "title": "ORTISEI GALLERIA",
+    "address": "STRADA STATALE 242 – ORTISEI (BZ)"
+  },
+  {
+    "id": 3242,
+    "lat": 46.6845,
+    "lng": 11.0805,
+    "title": "PARCINES BRD",
+    "address": "VIA ZEHENT"
+  },
+  {
+    "id": 3192,
+    "lat": 46.677833,
+    "lng": 11.061333,
+    "title": "PARCINES RABLA’",
+    "address": "VIA LAHN"
+  },
+  {
+    "id": 3172,
+    "lat": 46.391667,
+    "lng": 11.416,
+    "title": "PIETRALBA",
+    "address": "VIA CENTRO IN FRAZIONE MONTE SAN PIETRO"
+  },
+  {
+    "id": 3023,
+    "lat": 46.536667,
+    "lng": 11.822,
+    "title": "PISCIADU",
+    "address": "FRAZIONE COLFOSCO"
+  },
+  {
+    "id": 3060,
+    "lat": 46.556667,
+    "lng": 11.921833,
+    "title": "PIZ SOREGA",
+    "address": "PIZ SOREGA - CORVARA IN BADIA (BZ)"
+  },
+  {
+    "id": 3005,
+    "lat": 46.626333,
+    "lng": 10.595333,
+    "title": "PRATO ALLO STELVIO",
+    "address": "-"
+  },
+  {
+    "id": 3140,
+    "lat": 47.037333,
+    "lng": 12.1,
+    "title": "PREDOI",
+    "address": "STRADA STATALE 621"
+  },
+  {
+    "id": 3102,
+    "lat": 46.481667,
+    "lng": 11.030167,
+    "title": "PREDOI",
+    "address": "STRADA PROVINCIALE 86"
+  },
+  {
+    "id": 3210,
+    "lat": 46.829667,
+    "lng": 10.512667,
+    "title": "RESIA",
+    "address": "VIA PAESE VECCHIO"
+  },
+  {
+    "id": 3007,
+    "lat": 46.911333,
+    "lng": 11.306833,
+    "title": "RIDANNA",
+    "address": "-"
+  },
+  {
+    "id": 3066,
+    "lat": 46.595,
+    "lng": 11.733333,
+    "title": "RIFUGIO DANIEL",
+    "address": "RIFUGIO DANIEL – BOLZANO (TR)"
+  },
+  {
+    "id": 3015,
+    "lat": 46.77,
+    "lng": 11.369667,
+    "title": "RIO BIANCO",
+    "address": "-"
+  },
+  {
+    "id": 3070,
+    "lat": 46.943833,
+    "lng": 12.0645,
+    "title": "RIVA DI TURES",
+    "address": "RIVA DI TURES"
+  },
+  {
+    "id": 3178,
+    "lat": 46.2405,
+    "lng": 11.2145,
+    "title": "SALORNO",
+    "address": "VIA DANTE ALIGHIERI"
+  },
+  {
+    "id": 3025,
+    "lat": 46.794167,
+    "lng": 11.694167,
+    "title": "SAN BENEDETTO - NAUDERS",
+    "address": "FRAZIONE S. BENEDETTO"
+  },
+  {
+    "id": 3218,
+    "lat": 46.732167,
+    "lng": 12.2915,
+    "title": "SAN CANDIDO",
+    "address": "VIA PONTE DEI CORRIERI – 39038"
+  },
+  {
+    "id": 3076,
+    "lat": 46.573333,
+    "lng": 11.930667,
+    "title": "SAN CASSIANO FANES",
+    "address": "STRADA PECEI"
+  },
+  {
+    "id": 3042,
+    "lat": 46.51,
+    "lng": 11.107667,
+    "title": "SAN FELICE DI SENALE",
+    "address": "LOCALITA’ MALGASOTT"
+  },
+  {
+    "id": 3206,
+    "lat": 46.533833,
+    "lng": 11.333667,
+    "title": "SAN GENESIO",
+    "address": "VIA PAESE"
+  },
+  {
+    "id": 3072,
+    "lat": 46.972833,
+    "lng": 11.6215,
+    "title": "SAN GIACOMO",
+    "address": "SAN GIACOMO"
+  },
+  {
+    "id": 3150,
+    "lat": 46.981667,
+    "lng": 11.945,
+    "title": "SAN GIOVANNI (VALLE AUTINA)",
+    "address": "STRADA STATALE N.621"
+  },
+  {
+    "id": 3148,
+    "lat": 46.811333,
+    "lng": 11.796833,
+    "title": "SAN GISMONDO PUSTERIA",
+    "address": "STRADA STATALE N.49 - CHIENES (BZ)"
+  },
+  {
+    "id": 3138,
+    "lat": 46.8145,
+    "lng": 11.243,
+    "title": "SAN LEONARDO",
+    "address": "STRADA STATALE 44 BIS"
+  },
+  {
+    "id": 3122,
+    "lat": 46.690167,
+    "lng": 11.8945,
+    "title": "SAN MARTINO IN BADIA",
+    "address": "STRADA STATALE 224 PICOLIN"
+  },
+  {
+    "id": 3134,
+    "lat": 46.793333,
+    "lng": 11.231833,
+    "title": "SAN MARTINO VAL PASSIRIA ELISUP.",
+    "address": "STRADA STATALE 44"
+  },
+  {
+    "id": 3136,
+    "lat": 46.783667,
+    "lng": 11.230833,
+    "title": "SAN MARTINO VAL PASSIRIO",
+    "address": "STRADA STATALE 44"
+  },
+  {
+    "id": 3027,
+    "lat": 46.508333,
+    "lng": 10.922,
+    "title": "SAN NICOLO’ VAL D’ULTIMO",
+    "address": "FRAZIONE SAN NICOLO’"
+  },
+  {
+    "id": 3238,
+    "lat": 46.577,
+    "lng": 11.079667,
+    "title": "SAN PANCRAZIO",
+    "address": "VIA TIEFGASS"
+  },
+  {
+    "id": 3132,
+    "lat": 46.7725,
+    "lng": 10.537167,
+    "title": "SAN VALENTINO",
+    "address": "STRADA STATALE 40"
+  },
+  {
+    "id": 3154,
+    "lat": 46.688333,
+    "lng": 11.943667,
+    "title": "SAN VIGILIO DI MAREBBE",
+    "address": "STRADA VAL DAI TAMERSC"
+  },
+  {
+    "id": 3124,
+    "lat": 46.557,
+    "lng": 11.718833,
+    "title": "SANTA CRISTINA GALLERIA",
+    "address": "STRADA STATALE 242"
+  },
+  {
+    "id": 3078,
+    "lat": 46.560167,
+    "lng": 11.735167,
+    "title": "S. CRISTINA VAL GARD.",
+    "address": "STRADA PLAN DA TIEJA – S.CRISTINA (BZ)"
+  },
+  {
+    "id": 3029,
+    "lat": 46.5475,
+    "lng": 11.0055,
+    "title": "SANTA VALBURGA",
+    "address": "FRAZIONE VALBURGA"
+  },
+  {
+    "id": 3019,
+    "lat": 46.541833,
+    "lng": 10.987167,
+    "title": "SANTA VALBURGA DIGA",
+    "address": "FRAZ. SANTA VALBURGA – S.VALBURGA (BZ)"
+  },
+  {
+    "id": 3058,
+    "lat": 46.639667,
+    "lng": 11.355833,
+    "title": "SARENTINO",
+    "address": "PIAZZA GRIES"
+  },
+  {
+    "id": 3044,
+    "lat": 46.889667,
+    "lng": 11.864,
+    "title": "SELVA DEI MOLINI",
+    "address": "LOCALITA’ SELVA DI CENTRO"
+  },
+  {
+    "id": 3156,
+    "lat": 46.563167,
+    "lng": 11.771833,
+    "title": "SELVA VAL GARDENA",
+    "address": "STREDA VAL"
+  },
+  {
+    "id": 3116,
+    "lat": 46.557833,
+    "lng": 11.751667,
+    "title": "SELVA VAL GARDENA",
+    "address": "STRADA RAINELL SELVA VAL GARDENA (BZ)"
+  },
+  {
+    "id": 3166,
+    "lat": 46.691333,
+    "lng": 12.358833,
+    "title": "SESTO",
+    "address": "VIA CAMPO TENNIS"
+  },
+  {
+    "id": 3092,
+    "lat": 46.626667,
+    "lng": 10.784,
+    "title": "SILANDRO",
+    "address": "STRADA PROVINCIALE 38"
+  },
+  {
+    "id": 3098,
+    "lat": 46.555167,
+    "lng": 11.557167,
+    "title": "SIUSI CASTELROTTO",
+    "address": "STRADA PROVINCIALE 64"
+  },
+  {
+    "id": 3106,
+    "lat": 46.656167,
+    "lng": 10.582,
+    "title": "SLUDERNO",
+    "address": "STRADA PROVINCIALE N.106"
+  },
+  {
+    "id": 3009,
+    "lat": 46.523667,
+    "lng": 10.59,
+    "title": "SOLDA",
+    "address": "-"
+  },
+  {
+    "id": 3142,
+    "lat": 46.525,
+    "lng": 10.588333,
+    "title": "SOLDA CROCE BIANCA",
+    "address": "STRADA STATALE 622"
+  },
+  {
+    "id": 3208,
+    "lat": 46.529,
+    "lng": 11.403833,
+    "title": "SOPRABOLZANO",
+    "address": "VIA PAESE"
+  },
+  {
+    "id": 3064,
+    "lat": 46.8825,
+    "lng": 11.382667,
+    "title": "STANGHE",
+    "address": "RACINES DI DENTRO"
+  },
+  {
+    "id": 3108,
+    "lat": 46.345333,
+    "lng": 11.257,
+    "title": "TERMENO",
+    "address": "STRADA PROVINCIALE N.127"
+  },
+  {
+    "id": 3011,
+    "lat": 46.5595,
+    "lng": 11.1805,
+    "title": "TESIMO",
+    "address": "-"
+  },
+  {
+    "id": 3052,
+    "lat": 46.468167,
+    "lng": 11.524,
+    "title": "TIRES",
+    "address": "MULWEG"
+  },
+  {
+    "id": 3114,
+    "lat": 46.867833,
+    "lng": 11.325333,
+    "title": "VAL DI RACINES",
+    "address": "STRADA RACINES DI SOTTO"
+  },
+  {
+    "id": 3234,
+    "lat": 46.7685,
+    "lng": 12.025833,
+    "title": "VALDORA",
+    "address": "VIA STAZIONE"
+  },
+  {
+    "id": 3084,
+    "lat": 46.851667,
+    "lng": 11.622833,
+    "title": "VALLES",
+    "address": "STRADA PROVINCIALE 100"
+  },
+  {
+    "id": 3032,
+    "lat": 46.630667,
+    "lng": 11.540167,
+    "title": "VILLANDRO",
+    "address": "J. SCHGUANINSTRABE"
+  },
+  {
+    "id": 3160,
+    "lat": 46.556667,
+    "lng": 11.226333,
+    "title": "VILPIANO",
+    "address": "Via Birreria – 39018 Vilpiano (TN)"
+  },
+  {
+    "id": 3162,
+    "lat": 46.8845,
+    "lng": 11.439833,
+    "title": "VIPITENO AVIOSUPERFICIE",
+    "address": "VIA BRENNERO – 39049 VIPITENO (BZ)"
+  },
+  {
+    "id": 3230,
+    "lat": 46.898333,
+    "lng": 11.426333,
+    "title": "VIPITENO OSPEDALE",
+    "address": "VIA SANTA MARGHERITA – 39049"
+  },
+  {
+    "id": 3013,
+    "lat": 46.705,
+    "lng": 10.492833,
+    "title": "WATLES",
+    "address": "-"
+  }
+]

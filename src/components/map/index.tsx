@@ -39,6 +39,7 @@ const MapComponent = ({
   zoom,
   searching,
   showABidirectional,
+  showDriveRoute,
   onSearchStart,
   onSearchEnd,
 }: MapComponentProps) => {
@@ -111,6 +112,8 @@ const MapComponent = ({
   // Rappresento nodi e percorsi sulla mappa
   useEffect(() => {
     if (!searching) {
+      const showFlightRoute = !showDriveRoute;
+      const showAStar = !showABidirectional;
       // Mostro nodi sulla mappa
       const nodesFeatures = [];
       if (destinationCoords) {
@@ -127,7 +130,7 @@ const MapComponent = ({
           )
         );
       }
-      if (trailheadCoords) {
+      if (showDriveRoute && trailheadCoords) {
         nodesFeatures.push(
           ...setFeaturesStyle(
             createNodeFeatures(trailheadCoords),
@@ -135,7 +138,7 @@ const MapComponent = ({
           )
         );
       }
-      if (heliportCoords) {
+      if (showFlightRoute && heliportCoords) {
         nodesFeatures.push(
           ...setFeaturesStyle(
             createNodeFeatures(heliportCoords),
@@ -143,7 +146,7 @@ const MapComponent = ({
           )
         );
       }
-      if (helipadCoords) {
+      if (showFlightRoute && helipadCoords) {
         nodesFeatures.push(
           ...setFeaturesStyle(
             createNodeFeatures(helipadCoords),
@@ -156,7 +159,7 @@ const MapComponent = ({
       // Percorsi sulla mappa
       const routesFeatures = [];
       // Switch offroad nodes showABidirectional
-      if (offroadNodesAStandard && !showABidirectional) {
+      if (offroadNodesAStandard && showAStar) {
         routesFeatures.push(
           ...setFeaturesStyle(
             createWayFeatures(offroadNodesAStandard),
@@ -172,18 +175,18 @@ const MapComponent = ({
           )
         );
       }
-      if (driveTrailPath) {
+      if (showDriveRoute && driveTrailPath) {
         routesFeatures.push(...setFeaturesStyle(driveTrailPath, routeStyle));
       }
-      if (helicopterTrailPath) {
+      if (showFlightRoute && helicopterTrailPath) {
         routesFeatures.push(
           ...setFeaturesStyle(helicopterTrailPath, routeStyle)
         );
       }
-      if (roadPath) {
+      if (showDriveRoute && roadPath) {
         routesFeatures.push(...setFeaturesStyle(roadPath, roadRouteStyle));
       }
-      if (flightPath) {
+      if (showFlightRoute && flightPath) {
         routesFeatures.push(...setFeaturesStyle(flightPath, flightRouteStyle));
       }
       routesLayer.setSource(createVectorSource(routesFeatures));
@@ -200,7 +203,7 @@ const MapComponent = ({
       graphLayer.setSource(createVectorSource(graphFeatures));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searching, showABidirectional]);
+  }, [searching, showDriveRoute, showABidirectional]);
 
   return <div ref={ref} className="w-full flex-1 md:h-screen" />;
 };

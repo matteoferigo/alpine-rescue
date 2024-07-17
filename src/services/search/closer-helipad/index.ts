@@ -1,3 +1,4 @@
+import staticHelipadCoords from "@/const/helipad/coords";
 import { parseCenterElement } from "@/services/overpass/parsers/center";
 import { getCloserNode } from "@/services/path/way/closer-node";
 import { searchHelipadNearby } from "@/services/requests/helipad/nearby";
@@ -7,11 +8,14 @@ export async function searchCloserHelipadPoint(emergencyCoords: Coordinate) {
   try {
     // Cerco elisuperfici vicine
     const helipads = await searchHelipadNearby(emergencyCoords, 1000);
-    if (!helipads.length)
+    if (!helipads.length && !staticHelipadCoords.length)
       throw new Error("Non sono state trovate elisuperfici nelle vicinanze");
 
     // Scelgo il più vicino
-    const helipadsCoords = helipads.map(parseCenterElement);
+    const helipadsCoords = [
+      ...helipads.map(parseCenterElement),
+      ...staticHelipadCoords,
+    ];
     const helipadNode = getCloserNode(helipadsCoords, emergencyCoords);
     return helipadNode.coordinate;
   } catch (error) {

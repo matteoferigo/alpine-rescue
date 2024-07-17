@@ -1,9 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
 
-export type SummaryComponentProps = {
-  open: boolean;
+export type SummaryCompleteRouteProps = {
   showABidirectional: boolean;
-  setShowABidirectional: Dispatch<SetStateAction<boolean>>;
   showDriveRoute: boolean;
   setShowDriveRoute: Dispatch<SetStateAction<boolean>>;
 };

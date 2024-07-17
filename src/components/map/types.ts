@@ -5,6 +5,7 @@ export type MapComponentProps = {
   zoom: number;
   searching: boolean;
   showABidirectional: boolean;
+  showDriveRoute: boolean;
   onSearchStart(): void;
   onSearchEnd(): void;
 };

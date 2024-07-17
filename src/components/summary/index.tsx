@@ -1,5 +1,4 @@
-import SummaryDriveRoute from "@/components/summary/drive";
-import SummaryHelicopterRoute from "@/components/summary/helicopter";
+import SummaryCompleteRoute from "@/components/summary/complete";
 import SummaryOffroadRoute from "@/components/summary/offroad";
 import type { SummaryComponentProps } from "@/components/summary/types";
 
@@ -7,6 +6,8 @@ const SummaryComponent = ({
   open,
   showABidirectional,
   setShowABidirectional,
+  showDriveRoute,
+  setShowDriveRoute,
 }: SummaryComponentProps) => {
   return (
     <aside
@@ -16,12 +17,15 @@ const SummaryComponent = ({
           : "w-full h-0 md:w-0 md:h-screen p-0 ease-out"
       }`}
     >
+      <SummaryCompleteRoute
+        showABidirectional={showABidirectional}
+        showDriveRoute={showDriveRoute}
+        setShowDriveRoute={setShowDriveRoute}
+      />
       <SummaryOffroadRoute
         showABidirectional={showABidirectional}
         setShowABidirectional={setShowABidirectional}
       />
-      <SummaryDriveRoute showABidirectional={showABidirectional} />
-      <SummaryHelicopterRoute showABidirectional={showABidirectional} />
     </aside>
   );
 };

@@ -29,6 +29,7 @@ export default function Home() {
     setSearching(false);
   };
   const [showABidirectional, setShowABidirectional] = useState(false);
+  const [showDriveRoute, setShowDriveRoute] = useState(false);
 
   return (
     <main>
@@ -49,11 +50,14 @@ export default function Home() {
                   onSearchStart={onSearchStart}
                   onSearchEnd={onSearchEnd}
                   showABidirectional={showABidirectional}
+                  showDriveRoute={showDriveRoute}
                 />
                 <SummaryComponent
                   open={showResults}
                   showABidirectional={showABidirectional}
                   setShowABidirectional={setShowABidirectional}
+                  showDriveRoute={showDriveRoute}
+                  setShowDriveRoute={setShowDriveRoute}
                 />
                 <div className="absolute top-2 right-2 md:top-4 md:right-6">
                   <HamburgerButton
