@@ -5,7 +5,8 @@ import { type Coordinate } from "ol/coordinate";
 
 export function calculatePathAStarFromTop(
   graph: Coordinate[][],
-  terrains: TerrainPolygon[]
+  terrains: TerrainPolygon[],
+  buildings: TerrainPolygon[]
 ) {
   // Parto dal primo nodo
   const firstNode = graph.at(0)![0];
@@ -44,7 +45,13 @@ export function calculatePathAStarFromTop(
         }, []);
 
     // Recupero miglior nodo
-    const nextBest = getBestNode(nextNodes, currentNode, goalNode, terrains);
+    const nextBest = getBestNode(
+      nextNodes,
+      currentNode,
+      goalNode,
+      terrains,
+      buildings
+    );
     const [nextNode] = nextBest.nodes;
     const [nextArch] = nextBest.archs;
 
@@ -82,11 +89,12 @@ function getBestNode(
   nodes: Coordinate[],
   fromNode: Coordinate,
   toNode: Coordinate,
-  terrains: TerrainPolygon[]
+  terrains: TerrainPolygon[],
+  buildings: TerrainPolygon[]
 ) {
   return nodes.reduce((acc: WeightedPath | null, node) => {
     // Calcolo la percorrenza fino al nodo
-    const fromArch = calculateArchWeight(fromNode, node, terrains);
+    const fromArch = calculateArchWeight(fromNode, node, terrains, buildings);
     // Stimo la percorrenza fino all'ultimo nodo (ignorando il terreno)
     const toArch =
       node === toNode

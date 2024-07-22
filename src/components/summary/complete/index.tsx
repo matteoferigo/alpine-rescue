@@ -41,14 +41,15 @@ const SummaryCompleteRoute = ({
     <section>
       <h2 className="text-lg my-3 font-semibold text-gray-900 dark:text-white">
         <span className="inline-block text-center w-7 h-7 rounded-full bg-blue-200 mr-1">
-          🚑
+          {/* 🚑 */}
+          🚒
         </span>
         <span>Percorso ottimale calcolato</span>
       </h2>
 
       {hasCompleteRoute ? (
         <>
-          <div className="relative flex w-full mb-2 bg-white dark:bg-slate-900 rounded-full">
+          {/* <div className="relative flex w-full mb-2 bg-white dark:bg-slate-900 rounded-full">
             <span className="absolute inset-0 m-1 pointer-events-none">
               <span
                 className={`absolute inset-0 w-1/2 bg-indigo-500 rounded-full shadow-sm shadow-indigo-950/10 transform transition-transform duration-150 ease-in-out translate-x-0 ${
@@ -100,7 +101,7 @@ const SummaryCompleteRoute = ({
                   : "---"}
               </span>
             </button>
-          </div>
+          </div> */}
 
           {showFlightRoute && hasHelicopterRoute ? (
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

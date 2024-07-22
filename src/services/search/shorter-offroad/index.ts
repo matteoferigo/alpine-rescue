@@ -4,6 +4,7 @@ import { calculatePathAStarBidirectional } from "@/services/graph/calculate/path
 import { calculatePathAStarFromTop } from "@/services/graph/calculate/path/a-star/from-top";
 import { createGraphFrom2Points } from "@/services/graph/create/from-points";
 import { sortNodesByDistance } from "@/services/path/nodes/sort-by-distance";
+import { searchBuildingPolygons } from "@/services/search/building-polygons";
 import { searchCloserNodes } from "@/services/search/closer-nodes";
 import { searchTerrainPolygons } from "@/services/search/terrain-polygons";
 import type { Coordinate } from "ol/coordinate";
@@ -19,10 +20,12 @@ export async function searchShorterOffroad(
 ) {
   try {
     // Cerco sentieri vicini (seleziono nodi più vicini)
-    const [closerNodes, terrainPolygons] = await Promise.all([
+    const [closerNodes, terrainPolygons, buildingPolygons] = await Promise.all([
       searchCloserNodes(destination, maxDistance),
       // Recupero i tipi di terreni nella zona
       searchTerrainPolygons(destination, maxDistance + 500),
+      // Recupero gli edifici nell'area
+      searchBuildingPolygons(destination, maxDistance + 500),
     ]);
     const nodesByDistance = sortNodesByDistance(
       closerNodes,
@@ -50,10 +53,15 @@ export async function searchShorterOffroad(
         );
 
         // Calcolo pesi degli archi (percorrenza in secondi)
-        const bestPathAStar = calculatePathAStarFromTop(graph, terrainPolygons);
+        const bestPathAStar = calculatePathAStarFromTop(
+          graph,
+          terrainPolygons,
+          buildingPolygons
+        );
         const bestPathBiridectional = calculatePathAStarBidirectional(
           graph,
-          terrainPolygons
+          terrainPolygons,
+          buildingPolygons
         );
 
         // Restituisco il percorso migliore (e alternativa)

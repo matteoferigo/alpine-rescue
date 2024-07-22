@@ -20,9 +20,13 @@ export const useFindDriveRoute = () => {
       const { shorterPath } = await searchShorterRoute(fromPoint, toPoint);
 
       // Definisco sentiero
-      setTrailheadCoords(shorterPath.trailheadPoint);
-      setTrailPath(createRouteFeatures(shorterPath.trailDirections));
-      setTrailDuration(shorterPath.trailDuration);
+      if (shorterPath.trailDuration) {
+        setTrailheadCoords(shorterPath.trailheadPoint);
+        setTrailPath(createRouteFeatures(shorterPath.trailDirections!));
+        setTrailDuration(shorterPath.trailDuration);
+      } else {
+        setTrailDuration(0);
+      }
       // Definisco strata fino ad attacco sentiero
       setRoadPath(createRouteFeatures(shorterPath.roadDirections));
       setRoadDuration(shorterPath.roadDuration);

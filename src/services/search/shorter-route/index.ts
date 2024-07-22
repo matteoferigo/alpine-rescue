@@ -41,14 +41,30 @@ export async function searchShorterRoute(
         const trailheadPoint = [node.lon, node.lat];
         // Recupero i pesi verso il punto di attacco del sentiero
         // e dall'attacco del sentiero fino al punto di arrivo
-        const [roadDirections, trailDirections] = await Promise.all([
-          getCarDirections(startRoadPoint, trailheadPoint)
-            .then((res) => ("error" in res ? null : res))
-            .catch(() => null),
-          getFootDirections(trailheadPoint, endFootPoint)
-            .then((res) => ("error" in res ? null : res))
-            .catch(() => null),
-        ]);
+        const [roadDirections, trailDirections, roadOnlyDirections] =
+          await Promise.all([
+            getCarDirections(startRoadPoint, trailheadPoint)
+              .then((res) => ("error" in res ? null : res))
+              .catch(() => null),
+            getFootDirections(trailheadPoint, endFootPoint)
+              .then((res) => ("error" in res ? null : res))
+              .catch(() => null),
+            getCarDirections(startRoadPoint, endFootPoint)
+              .then((res) => ("error" in res ? null : res))
+              .catch(() => null),
+          ]);
+        // Fine percorso raggiungibile con l'auto
+        if (roadOnlyDirections) {
+          const roadOnlyDuration = getRouteDuration(roadOnlyDirections);
+          return {
+            trailheadPoint,
+            roadDirections: roadOnlyDirections,
+            trailDirections: null,
+            roadDuration: roadOnlyDuration,
+            trailDuration: 0,
+            duration: roadOnlyDuration,
+          };
+        }
         // Calcolo la durata complessiva
         if (!roadDirections || !trailDirections) return null;
         const roadDuration = getRouteDuration(roadDirections);

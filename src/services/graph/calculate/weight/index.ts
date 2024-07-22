@@ -4,6 +4,7 @@ import { isNodeInPolygon } from "@/services/path/polygon/intersects/node";
 import { getSpeedAvg } from "@/services/path/speed/avg";
 import { calculateElevationGain } from "@/services/path/way/elevation-gain";
 import { calculateWayLength } from "@/services/path/way/length";
+import { getNodesBeetween } from "@/services/path/way/nodes-between";
 import { calculateSlope } from "@/services/path/way/slope";
 import { calculateWayTimeEstimation } from "@/services/path/way/time-estimation";
 import type { TerrainPolygon, TerrainType } from "@/services/terrain/types";
@@ -12,8 +13,33 @@ import type { Coordinate } from "ol/coordinate";
 export function calculateArchWeight(
   fromNode: Coordinate,
   toNode: Coordinate,
-  terrains?: TerrainPolygon[]
+  terrains?: TerrainPolygon[],
+  buildings?: TerrainPolygon[]
 ): WeightedArch {
+  // Ignoro se attraversa un edificio
+  if (buildings?.length) {
+    const distance = +calculateWayLength(fromNode, toNode, 0).toFixed(2);
+    const [innerNode] = getNodesBeetween(fromNode, toNode, distance / 2);
+    if (
+      buildings.some(
+        (building) =>
+          isNodeInPolygon(fromNode, building.polygon) ||
+          isNodeInPolygon(toNode, building.polygon) ||
+          isNodeInPolygon(innerNode, building.polygon)
+      )
+    )
+      return {
+        fromNode,
+        toNode,
+        descending: false,
+        distance,
+        duration: Infinity,
+        elevation: 0,
+        slope: 0,
+        speed: 0,
+        terrain: ["building"],
+      };
+  }
   // Recupero il tipo di terreno
   const terrainTags = terrains
     ? terrains.reduce((acc: TerrainType[], terrain) => {

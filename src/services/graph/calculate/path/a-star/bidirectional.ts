@@ -5,7 +5,8 @@ import type { Coordinate } from "ol/coordinate";
 
 export function calculatePathAStarBidirectional(
   graph: Coordinate[][],
-  terrains: TerrainPolygon[]
+  terrains: TerrainPolygon[],
+  buildings: TerrainPolygon[]
 ) {
   // Parto dagli estremi
   const startNode = graph.at(0)![0];
@@ -62,6 +63,7 @@ export function calculatePathAStarBidirectional(
       currentNode,
       goalNode,
       terrains,
+      buildings,
       reverse
     );
     // Ricongiungo i percorsi una volta raggiunto il centro
@@ -123,6 +125,7 @@ function getBestRoutes(
   fromNode: Coordinate,
   toNode: Coordinate,
   terrains: TerrainPolygon[],
+  buildings: TerrainPolygon[],
   reverse?: boolean
 ) {
   const closerRoutes = nodes.map((node) => {
@@ -130,7 +133,8 @@ function getBestRoutes(
     const fromArch = calculateArchWeight(
       reverse ? node : fromNode,
       reverse ? fromNode : node,
-      terrains
+      terrains,
+      buildings
     );
     // Stimo la percorrenza fino all'ultimo nodo (ignorando il terreno)
     const toArch =
