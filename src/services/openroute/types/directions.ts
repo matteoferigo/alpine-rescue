@@ -1,5 +1,6 @@
 import type { ResponseMetadata } from "@/services/openroute/types";
 import type { BoundingBox } from "@/services/openroute/types/bbox";
+import type { Coordinate } from "ol/coordinate";
 import type Feature from "ol/Feature";
 
 export type DirectionsResponse = {
@@ -24,6 +25,9 @@ type DirectionsFeature = Feature & {
       distance: number;
       duration: number;
     };
+  };
+  geometry: {
+    coordinates: Coordinate[];
   };
 };
 

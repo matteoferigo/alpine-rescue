@@ -21,14 +21,24 @@ export const useFindDriveRoute = () => {
 
       // Definisco sentiero
       if (shorterPath.trailDuration) {
+        // Correggo graficamente i risultati forzando gli estremi
+        const trailDirections = shorterPath.trailDirections!
+        trailDirections.features.at(0)!.geometry.coordinates.unshift(trailDirections.metadata.query.coordinates[0])
+        trailDirections.features.at(-1)!.geometry.coordinates.push(trailDirections.metadata.query.coordinates[0])
+        // Definisco percorso sul sentiero
         setTrailheadCoords(shorterPath.trailheadPoint);
-        setTrailPath(createRouteFeatures(shorterPath.trailDirections!));
+        setTrailPath(createRouteFeatures(trailDirections));
         setTrailDuration(shorterPath.trailDuration);
       } else {
         setTrailDuration(0);
       }
-      // Definisco strata fino ad attacco sentiero
-      setRoadPath(createRouteFeatures(shorterPath.roadDirections));
+      
+      // Correggo graficamente i risultati forzando gli estremi
+      const roadDirections = shorterPath.roadDirections;
+      roadDirections.features.at(0)!.geometry.coordinates.unshift(roadDirections.metadata.query.coordinates[0])
+      roadDirections.features.at(-1)!.geometry.coordinates.push(roadDirections.metadata.query.coordinates[1])
+      // Definisco strada fino ad attacco sentiero
+      setRoadPath(createRouteFeatures(roadDirections));
       setRoadDuration(shorterPath.roadDuration);
     } catch (error) {
       showError(error);
